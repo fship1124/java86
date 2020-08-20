@@ -1,0 +1,38 @@
+<html>
+<head>
+<title> transition  </title>
+<meta charset="utf-8" />
+<style>
+	#outer > div { width: 200px; height: 200px; background-color: yellowgreen; animation: myani 4s infinite; position: absolute; }
+	/*
+	@keyframes myani {
+		from { background-color: yellowgreen; border-radius: 0px; }
+		to { background-color: green; border-radius: 100px; }
+	}
+	*/
+	/*
+	@keyframes myani {
+		0% { background-color: #fbefcc; border-radius: 0px; }
+		25% { background-color: #f9ccac; border-radius: 100px; }
+		50% { background-color: #f4a688; border-radius: 100px; }
+		75% { background-color: #e0876a; border-radius: 100px; }
+		100% { background-color: #d9ad7c; border-radius: 100px; }
+	}
+	*/
+	@keyframes myani {
+		0% { background-color: #fbefcc; border-radius: 0px; left: 0px; top: 0px; }
+		25% { background-color: #f9ccac; border-radius: 100px; left: 300px; top: 0px; }
+		50% { background-color: #f4a688; border-radius: 0px; left: 0px; top: 300px; }
+		75% { background-color: #d9ad7c; border-radius: 100px; left: 300px; top: 300px; }
+		100% { background-color: #fbefcc; border-radius: 0px; left: 0px; top: 0px; }
+	}
+</style>
+</head>
+
+<body>
+<p> animation 속성 연습</p>
+<div id="outer">
+    <div></div>
+</div>
+</body>
+</html>

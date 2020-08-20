@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+	div {
+		margin: 10px 0px;
+		height: 200px;
+		border: 5px solid skyblue;
+	}
+	input[type=button] {
+		font-size: 20px;
+		font-weight: bold;
+		width: 150px;
+		height: 40px;
+	}
+</style>
+	<script src="../js/jquery-3.1.0.js"></script>
+<script>
+	function imgCopy() {
+		// 이미지 한개만 
+// 		$("div").append($("img"));
+		
+		// 선택한 이미지뿐만 아니라 배의 배수가 계속 clone
+// 		$("div").append($("img").clone());
+		
+		// 선택한 이미지 1개만 clone 
+		$("div").append($("body > img").clone());
+		
+	}
+</script>
+</head>
+<body>
+	<input type="button" value="복사하기" onclick="imgCopy()" />
+    <div></div>ss
+    <img src="images/pic1.jpg" width="150" height="200" />
+</body>
+</html>

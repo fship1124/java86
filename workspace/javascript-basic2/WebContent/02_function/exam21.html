@@ -1,0 +1,23 @@
+<!-- 앞에 생략 (window.) 
+	parseInt("값")
+	number 값으로 변환 : 정수형
+	
+	//숫자값만 가져와서 내장객체만 쓴다
+	Number("값") : 내장객체
+	값에 숫자 이외의 문자가 있으면 변경되지 않는다.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	console.log(parseInt("123") + "-" + parseInt("123a") + "-" + parseInt("a123")); //123-123-123
+	console.log(Number("123") + "-" + Number("123a") + "-" + Number("a123"));
+	
+	
+</script>
+</body>
+</html>

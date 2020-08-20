@@ -1,0 +1,31 @@
+<!-- 
+	객체 비교하기
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+    // 기본형이므로 값비교하면 결과물은 true
+	var i = 1;
+	var j = "1";
+	
+	console.log(i == j);
+	
+	// 주소를 가지고 있는 객체(참조형)으로 새롭게 생성되므로, 다른 공간을 가리키고 있기 때문에 결과물은 false로 나온다.
+	var iObj = { count: 1};
+	var jObj = { count: 1};
+	console.log(iObj == jObj);
+	
+	var kObj = jObj;
+	console.log(jObj == kObj);
+	
+	kObj.count = 1000;
+	console.log(jObj.count);
+	console.log(kObj.count);
+</script>
+</body>
+</html>

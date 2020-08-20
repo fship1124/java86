@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+// 	navigator안에 userAgent 속성: 사용자가 어떤경로를 통해서 들어왔는지 정보를 알수 있는 속성
+	console.log(navigator);	
+	var agent = navigator.userAgent;
+	if (agent.indexOf("iPhone") != -1) {
+		msg = "iPhon 접속";
+	} else if (agent.indexOf("Android") != -1) {
+		msg = "Android 접속";
+	} else if (agent.indexOf("Chrome") != -1) {
+		msg = "Chrome 접속";
+	}
+	alert(msg);
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="600" height="400" 
+			style="border: 1px solid tomato"></canvas>
+	
+	<script>
+		var canvas = document.querySelector("#myCanvas");
+		var ctx = canvas.getContext('2d');
+		
+		ctx.font = "bold 40px 궁서";
+		
+		ctx.textAlign = "center";           // 글씨가 좌표점의 중심이 되어야 한다
+		ctx.fillText("HTML5", 10, 60);       //좌표값 위쪽으로 채워진 글자형태로 그리겠다 10:x, 60:y  
+		
+		ctx.textAlign = "left";           // start
+		ctx.strokeText("HTML5", 10, 120);
+		
+		ctx.textAlign = "right";           // end
+		ctx.strokeText("HTML5", 10, 180, 200);
+	</script>
+
+</body>
+</html>

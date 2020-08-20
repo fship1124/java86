@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	body {
+		color: white;
+	}
+	#full {
+		width: 300px;
+		height: 400px;
+		background-color: #123456;
+	}
+	#aa {
+		font-weight: bold;
+	}
+	#regdate {
+		font-size: 10px;
+	}
+</style>
+<script src="../js/jquery-3.1.0.js"></script>
+</head>
+<body>
+	<div id="full">
+	<div><span id ="aa">국회뉴스</span><span id= "boardCount">1</span>/<span id = "boardLength"></span>
+		<button>◀</button>
+		<button>▶</button>
+		<button>더보기</button>
+	</div>
+	<hr>
+	<div id="boardBody"></div>
+	</div>
+	<script>
+		var asdasd;
+		var pageCount = 1;
+		var maxPageCount = 0;
+		var first = 0;
+		var last = 5;
+		var pageview = 5;
+		var gogo;
+		$(function(){
+			$.ajax({
+				type: "GET",
+				url : "/kimhodong/quiz/ajaxquiz1",
+			dataType: "json",
+			 success: firstPage
+			});
+			$('#full').trigger("mouseleave");
+		});
+		function firstPage(result) {
+				boardHtml = "";
+				maxPageCount = Math.ceil(result.length/pageview);
+				 $("#boardLength").html(maxPageCount);
+				 asdasd = result;
+				 pageaa(asdasd,first,last);
+		}
+		function pageaa(result, first, last) {
+			var boardHtml = "";
+			if (last > result.length) {
+				last = result.length;
+				console.log(last);
+			}
+			for (var i = first; i < last; i++) {
+				 var list = result[i];
+				boardHtml += "<div><span id='content'>" + list.content + "</span><div>";
+				boardHtml += "<span id='regdate'>" + list.date + "</span>";
+				boardHtml += "<hr>"; 
+			 }
+			 $("#boardBody").html(boardHtml);
+		}
+		$("button:eq(1)").click(function() {
+			if (pageCount == maxPageCount) {
+				pageCount = 1;
+				first = 0;
+				last = 5;
+				pageaa(asdasd,first,last);
+				$("#boardCount").html(pageCount);
+				return false;
+			}
+			first += pageview;
+			last += pageview;
+			pageaa(asdasd,first,last);
+			pageCount++;
+			$("#boardCount").html(pageCount);
+		});
+		$("button:eq(0)").click(function() {
+			if (pageCount == 1) {
+				pageCount = maxPageCount;
+				first = (maxPageCount * pageview) - pageview;
+				last = maxPageCount * pageview;
+				pageaa(asdasd,first,last);
+				$("#boardCount").html(pageCount);
+				return false;
+			}
+			first -= pageview;
+			last -= pageview;
+			pageaa(asdasd,first,last);
+			pageCount--;
+			$("#boardCount").html(pageCount);
+		});
+		
+		$("#full").mouseenter(function(){
+			clearInterval(gogo);
+		});
+		$("#full").mouseleave(function(){
+			gogo = setInterval(function(){
+				$('button:eq(1)').trigger("click");
+			}, 1000);
+		});
+	</script>
+</body>
+</html>

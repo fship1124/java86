@@ -1,0 +1,53 @@
+<!-- 
+	select
+	
+	객체.selectedIndex	: select 객체에서 선택된 인덱스를 반환 ..선택이 사용자가 햇는지 안했는지 알수 있음.
+	객체.options			: select 객체에 포함된 option 객체들의 배열. ..연관배열객체
+	객체.disabled = true	: 비활성화(선택 못하게 처리)
+	객체.disabled = false: 활성화(선택하게 처리)
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body> <!-- onsubmit submit할때 발생한다. return하게 되면 -->
+	<form name="mForm" onsubmit="return chkForm();">
+		<select name="searchType">
+			<option value="">선택하세요</option>
+			<option value="writer">글쓴이</option>
+			<option value="title">제목</option>
+		</select>
+		<input type="text" name="searchWord"/>
+		<button>검색</button>
+		<!-- selecbox는 readonly 속성이 안되므로 아래와 같이  -->
+		<button type="button" onclick="changeDisabled(false)">활성화</button>
+		<button type="button" onclick="changeDisabled(true)">비활성화</button>
+	</form>
+	
+	
+	<script>
+		function changeDisabled(selStatus) {
+			var selBox = document.mForm.searchType;
+			
+			// 비활성화 클릭시 첫번째 선택항목을 비활성화 시켜라
+			if (selStatus) selBox.selectedIndex = 0;
+			
+			// changeDisabled(true) 비활성화 클릭시 disabled(비활성화)시킨다.
+			selBox.disabled = selStatus;
+			
+		}
+	
+		function chkForm() {
+			var selBox = document.mForm.searchType;
+// 			alert(selBox.options.length);
+// 		    alert("선택된 위치 : " + selBox.selectedIndex);
+			
+			alert(selBox.options[selBox.selectedIndex].value);
+			
+			return false;
+		}
+	</script>
+</body>
+</html>

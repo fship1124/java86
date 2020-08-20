@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context   
+       http://www.springframework.org/schema/context/spring-context.xsd">
+       
+	<!-- base-package=kr.co.mlec 밑에 있는 클래스들 중 @어노테이션붙어있는 클래스만.. 읽어서 스프링이 관리하는 컨트롤러에 저장한다.  -->
+	<!-- 스프링에 관리하는 컨테이너 -->
+	<!-- base-package으로 지정되어있는 디렉토리 밑에 있는 
+	     @어노테이션이 붙은 클래스는 스프링에 관리하는 컨테이너 저장시켜준다.  -->
+	<context:component-scan base-package="kr.co.mlec" />
+
+</beans>
+
+
+
+
+

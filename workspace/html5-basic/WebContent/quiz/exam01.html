@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="500" height="500" 
+		    style="border: 1px solid blue">
+	
+	</canvas>
+	
+	<script>
+		var canvas = document.querySelector("#myCanvas");
+		var ctx = canvas.getContext('2d');
+		
+		ctx.beginPath();
+		ctx.arc(canvas.width/2, canvas.height/2, canvas.width/2, 0, 360 * Math.PI / 180, false);
+		ctx.stroke();
+		
+		ctx.beginPath();
+		ctx.arc(125, 200, (canvas.width/2)/4, 0, 360 * Math.PI / 180, false);
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(375, 200, (canvas.width/2)/4, 0, 360 * Math.PI / 180, false);
+		ctx.stroke();
+		
+		ctx.beginPath();
+		ctx.arc(125, 150, (canvas.width/2)/4, 0, Math.PI , true);
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(375, 150, (canvas.width/2)/4, 0,  Math.PI , true);
+		ctx.stroke();
+		
+		ctx.beginPath();
+		ctx.arc(250, 350, (canvas.width/2)/3, 0,  Math.PI , false);
+		ctx.stroke();
+		
+		ctx.beginPath();
+		ctx.moveTo(250, 200);
+		ctx.lineTo(180, 300);
+		ctx.lineTo(250, 300);
+		ctx.stroke();
+		
+		
+		ctx.beginPath();
+		ctx.arc(125, 200, (canvas.width/2)/4*0.6, 0, 360 * Math.PI / 180, false);
+		ctx.fill();
+		ctx.beginPath();
+		ctx.arc(375, 200, (canvas.width/2)/4*0.6, 0, 360 * Math.PI / 180, false);
+		ctx.fill();
+		
+	</script>
+</body>
+</html>

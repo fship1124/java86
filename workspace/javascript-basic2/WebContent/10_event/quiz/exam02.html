@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    div { position: relative;}
+	img { width: 100px; height: 100px; }
+	
+	#img1 { position: absolute; }
+	#img2 { position: absolute; }
+</style>
+</head>
+<body>
+	<div>
+		<img id="img1" src="pic1.jpg">
+		<img id="img2" src="pic2.jpg">
+	</div>
+	
+	<script>
+		var img1 = document.querySelector("#img1");
+		var img2 = document.querySelector("#img2");
+	
+		img1.addEventListener("mousedown", function(e) {
+			var obj = e.target;
+			var hover = document.creatElement("")
+			e.style.
+			
+		});
+		
+		img1.document.addEventListeneer("mousedown", function(e) {
+			img1.style.left = e.clientX + "px";
+			img1.style.top = e.clientY + "px";
+		});
+	</script>
+</body>
+</html>

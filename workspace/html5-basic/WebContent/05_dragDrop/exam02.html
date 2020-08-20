@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	div {
+		width: 600px;
+		height: 200px;
+		border: 5px solid tomato;
+	}
+</style>
+</head>
+<body>
+	<h1>이미지를 드래그 하세요</h1>
+	<img src="pic1.jpg" width="300" height="180" draggable="true" 
+		ondragstart="console.log('드래그 시작');"
+		ondrag="console.log('드래그 중...');"               
+	/>                        <!-- ondrag : 계속적으로 이벤트 실행. -->
+	<br>
+	<div ondragenter="console.log('드랍존에 들어옴');"
+		 ondragleave="console.log('드랍존에서 빠져나감');"
+		 ondragover="console.log('드랍존 영역에 있음'); return false;"
+		 ondrop="console.log('드랍됨');"                
+	></div>                   <!-- ondrop 이벤트를 사용하려면 ondragover 이벤트는 중지(return false;)시켜놓고 실행해야한다 -->
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- 
+	모든 객체들은 자신의 부모가 누구인지 가리키는 _proto_(크롬) 라는 객체를 가지고 있다.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	// 객체가 되면 모든객체는 상속받는 개념이 된다.
+	// prototype chain : 모든객체들은 자동적으로 상속을받는다. 
+	// 또한 상속받은 부모의 정보를 담고 있는데, 그걸 찾아갈 수 있게 _proto_'변수:prototype' 을 가지고 있다. 
+	var member = { name: "홍길동" };
+	console.log(member.valueOf());  
+	console.log(member.toString());  
+	console.log(member.constructor());  
+	console.dir(member);
+	
+	function test() {}
+	console.dir(test);
+	// function test() 함수내 자동 기본설정되어 있음. arguments: null, caller: null, length: 0
+	// _proto_: function() : 함수는 상속받은 부모에 대한 정보를 함수로 가지고 있다.
+	// prototype : 
+</script>
+</body>
+</html>

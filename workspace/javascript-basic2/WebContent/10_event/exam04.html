@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	button {
+		width: 200px;
+		height: 100px;
+		color: white;
+		background: tomato;
+		border: 2px solid black;
+		font-size: 25px;
+	}
+	
+	div {
+		font-size: 25px;
+	}
+</style>
+</head>
+<body>
+	<button>클릭</button>
+	<div>0</div>
+	
+	<script>
+		var btn = document.querySelector("button");
+		btn.addEventListener("click", function() {
+			// 클릭시 div 숫자를 1 증가
+			var div = document.querySelector("div");
+			div.innerHTML = parseInt(div.innerHTML) + 1;
+		});
+		
+		// 이벤트 자동 호출
+// 		btn.click();
+		setInterval(function() { btn.click(); }, 500);
+	</script>
+	
+</body>
+</html>

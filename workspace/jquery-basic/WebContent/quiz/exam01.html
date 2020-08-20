@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="../js/jquery-3.1.0.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>슬라이드 쇼</h1>
+	<hr>
+	<div id="container">
+		<div>
+			<span>슬라이드 쇼 :</span>
+			<select>
+				<option value="1">1초</option>
+				<option value="2">2초</option>
+				<option value="3">3초</option>
+			</select>
+			<button>시작</button>
+			<button>중지</button>
+		</div>
+		<div>
+			<span>크기 : </span>
+			<button>축소</button>
+			<button>기본크기</button>
+			<button>확대</button>
+		</div>
+		<div>
+			<button >◀◀</button>
+			<button>◀</button>
+			<span>1</span>/<span>5</span>
+			<button>▶</button>
+			<button>▶▶</button>
+		</div>
+	</div>
+	<hr>
+	<div class="animation_canvas">
+		<div class="slider_panel">
+			<img src="../06_Event/images/Desert.jpg">
+			<img src="../06_Event/images/Hydrangeas.jpg">
+			<img src="../06_Event/images/Jellyfish.jpg">
+			<img src="../06_Event/images/Koala.jpg">
+			<img src="../06_Event/images/Lighthouse.jpg">
+			<img src="../06_Event/images/pic1.jpg">
+			<img src="../06_Event/images/pic2.jpg">
+			<img src="../06_Event/images/pic3.jpg">
+		</div>
+	</div>
+	
+	<script>
+		$("#container").css({
+			"width": 500,
+			"margin": 0 auto
+		});
+	
+	</script>
+</body>
+</html>

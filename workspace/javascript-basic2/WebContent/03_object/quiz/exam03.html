@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	// MyMap 객체 정의 하기
+	
+	/* 1차 구조 틀짜기
+	var MyMap = {
+		put: function (key, value) {},
+		get: function (key) { return ...; },
+		del: function (key) {  },
+		cler: function () {  },
+		size: function () { return ..; },
+	};
+	*/
+	
+	// 
+	var MyMap = {
+		data: {}, // 공통적으로 사용하는 데이터 저장공간
+		count: 0, // 공통적으로 사용하는 count 변수선언
+		put: function (key, value) {
+			this.data[key] = value;
+			this.count++; 
+		},
+		get: function (key) { 
+			return this.data[key]; 
+		},
+		del: function (key) {
+			delete this.data[key];
+			this.count--;
+		},
+		clear: function () {
+			this.data = {};
+			this.count = 0;
+		},
+		size: function () { 
+			return this.count; 
+		}
+	};
+	
+	
+	var mData = MyMap;
+	mData.put("id", "sbc");
+	mData.put("name", "sonbyungchan")
+
+	alert(mData.size());		// 2
+	alert(mData.get("id"));		// sbc
+	mData.del("id");
+	alert(mData.get("id"));		// undefined
+	mData.clear();
+	alert(mData.size());		// 0
+	
+	/*
+	var MyMap = {
+			put : function (setA1, setA2) { return { setA1 : setA2 }; }, 
+			size : fuction() { return 2; },
+			get : fuction(setA1) { return setA2; }
+	};
+	*/
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>이미지를 드래그 하세요</h1>
+	<img src="pic1.jpg" width="300" height="180" draggable="false" />  <!-- draggable="false": 드래그를 못하게하겠다. -->
+	<img src="pic1.jpg" width="300" height="180" draggable="true" 
+		ondragstart="console.log('드래그 시작');"
+		ondrag="console.log('드래그 중...');" />                        <!-- ondrag : 계속적으로 이벤트 실행. -->
+	<img src="pic1.jpg" width="300" height="180" draggable="auto" />  <!-- draggable="auto": 기본속성을 따르겠다. -->
+	
+</body>
+</html>

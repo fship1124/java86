@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../framework.js"></script>
+</head>
+<body>
+	<h1>서버에서 받은 메시지</h1>
+	<div id="result"></div>
+	<br>
+	<button>Ajax 호출</button>    
+	<script>
+			
+			// 1. 이벤트 설정
+		$("button").click(function () {
+			
+			var options = {type: "GET"};
+			console.log(options.type)
+			
+			$.ajax({type: "GET"});
+			
+			// ajax 호출하기
+			// 2. Ajax 요청과 응답에 대한 처리를 담당하는 객체 생성
+			var xhr = new XMLHttpRequest();	
+			
+			// 3. 응답에 대한 처리를 진행하는 콜백함수 등록
+			xhr.onreadystatechange = function () {
+// 				console.log("콜백함수 들어옴");s
+				// 결과 처리하기
+			   //콜백함수는 상태(readyState가 변경될때 마다 onreadystatechange호출. 총 4번 호출)
+				if (xhr.readyState == 4) {   // 모든 응답이 서버에서 왔을때. 상태값이 4번찍힘
+					if (xhr.status == 200) {  // 정상 수행되었을 때(응답결과가 에러이어도 전송되기 때문)
+						alert(xhr.responseText);
+					$("#result").html(xhr.responseText);
+					}
+				}
+			};
+			
+			// 4. Ajax 요청하기("GET"방식으로, "hell.jsp"을 부르겠다, true:비동기형식으로(잘쓰지않음));
+			xhr.open("GET", "/javascript-basic2/exam02", true);
+			// post 방식일 경우 파라미터처리를 send로 해준다.
+			xhr.send(null);
+		});
+	</script>
+
+</body>
+</html>

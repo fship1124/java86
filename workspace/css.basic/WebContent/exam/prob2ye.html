@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.container { padding: 50px; margin: 0 auto; width: 700px; }	
+	#month { margin-left: 260px; }
+	.header { margin-bottom: 8px; }
+	table { width: 700px; height: 510px; }
+	table, th, tr, td { border: 1px solid gray; border-collapse: collapse; }
+	#day { height: 10px; }
+	th { background-color: lightgray; }
+	td { text-align: left; font-size: 11px; vertical-align: top; }
+	#sunday { background-color: red; }
+	#saturday { background-color: blue; }
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="header">
+		<img alt="년도" src="images/2015.gif">
+		<span id="month">
+			<img alt="이전월로" src="images/schedule_ic.gif">
+			<img alt="월" src="images/schedule_10.gif">
+			<img alt="다음월로" src="images/schedule_ic02.gif">
+		</span>
+	</div>
+	<div class="content">
+		<table>
+			<tr id="day">
+				<th id="sunday">일요일</th>
+				<th>월요일</th>
+				<th>화요일</th>
+				<th>수요일</th>
+				<th>목요일</th>
+				<th>금요일</th>
+				<th id="saturday">토요일</th>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>1</td>
+				<td>2</td>
+				<td>
+					<img alt="휴관일" src="images/icon_closureday.gif"><br>
+					개천절
+				</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>
+					<img alt="휴관일" src="images/icon_closureday.gif"><br>
+					정기휴관일
+				</td>
+				<td>6</td>
+				<td>
+					<img alt="휴관일" src="images/icon_closureday.gif"><br>
+					개천절
+				</td>
+				<td>8</td>
+				<td>9</td>
+				<td>10</td>
+			</tr>
+			<tr>
+				<td>11</td>
+				<td>
+					<img alt="휴관일" src="images/icon_closureday.gif"><br>
+					정기휴관일
+				</td>
+				<td>13</td>
+				<td>14</td>
+				<td>15</td>
+				<td>16</td>
+				<td>17</td>
+			</tr>
+			<tr>
+				<td>18</td>
+				<td>
+					<img alt="휴관일" src="images/icon_closureday.gif"><br>
+					정기휴관일
+				</td>
+				<td>20</td>
+				<td>21</td>
+				<td>22</td>
+				<td>23</td>
+				<td>24</td>
+			</tr>
+			<tr>
+				<td>25</td>
+				<td>
+					<img alt="휴관일" src="images/icon_closureday.gif"><br>
+					정기휴관일
+				</td>
+				<td>27</td>
+				<td>28</td>
+				<td>29</td>
+				<td>30</td>
+				<td>31</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</body>
+</html>

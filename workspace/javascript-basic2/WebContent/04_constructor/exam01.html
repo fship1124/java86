@@ -1,0 +1,79 @@
+<!-- 
+	자바스크립트 생성자란??
+	- 일반 함수이다. 
+	- 함수의 이름을 대문자로 설정함(선택적)
+	- 생성자의 역할을 하기 위해서 new와 함께 사용
+	- 함수에 클래스 역할을 부여함
+	- 생성자 함수내에서 this는 함수 자체를 나타낸다.
+	  (생성된 객체)
+	- 만약, new 와 같이 사용하지 않았다면
+	  생성자 함수 역할을 못한다.
+	  this가 함수를 가리키는 것이 아닌 window 객체를 가리킨다.
+	
+	함수의 프로토타입 체인
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	function Member(id, name, age) {
+		this.id = id;          // 함수내의 this는 
+		this.name = name;
+		this.age = age;
+		/*
+		this.info = function () {
+			console.log(this.id, this.name, this.age);
+		};
+		*/
+	}
+	
+	/*
+	// 부모의 prototype을 만들어서 직접 객체를 넣어줌
+	Member.prototype = {
+			info: function () {
+				console.log(this.id, this.name, this.age);
+			},
+			setId: function (id) {
+				this.id = id;
+			},
+			getId: function () {
+				return this.id;
+			}
+	};
+	*/
+	
+	
+	// 부모의 prototype 공간에 공통으로 들어가는 정보를 올려놓음
+	Member.prototype.info = fuction() {
+		console.log(this.id, this.name, this.age);
+	};
+	
+	Member.prototype.setId = fuction(id) {
+		this.id = id;
+	};
+	Member.prototype.getId = fuction() {
+		return this.id;
+	};
+	
+	var mem1 = new Member("kim", "김호동", 30);
+	var mem2 = new Member("lee", "이호동", 30);
+	
+// 	console.log(mem1);
+// 	console.log(mem1.id);
+// 	console.dir(mem1);
+	
+	/*
+	var mem2 = new Member("kim", "김호동", 30);
+	console.log(mem2);
+	console.log(mem2.id);
+	*/
+	
+//  var mem2 = Member("kim", "김호동", 30);  // new를 붙이지 않았으므로 일반 함수 호출로 함수내 return값이 없으므로 undefined 가 나온다.
+// 	console.log(mem2);          
+</script>
+</body>
+</html>

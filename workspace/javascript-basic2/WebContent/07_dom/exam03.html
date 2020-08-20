@@ -1,0 +1,39 @@
+<!-- 
+	엘리먼트에 속성 추가하기(Dom API)
+	
+	객체.setAttribute(속성, 값);
+	
+	사용자 정의 속성은 추가할 수 있다.
+	(표준에 맞게 추가하기 위해 "data-속성명" 으로 설정한다. )
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>3
+<script>
+	function doAdd() {
+		var pList = document.getElementById("pList");
+		
+		// <img /> 태그 생성
+		var imgObj = document.createElement("img");
+		
+		// <img src="pic1.jpg" "width:200" "height:150"/> 태그이 src 속성추가해서 값넣기
+		imgObj.setAttribute("src", "pic1.jpg");
+		imgObj.setAttribute("width", "300");
+		imgObj.setAttribute("height", "250");
+		
+		// 사용자 정의 속성 
+// 		imgObj.setAttribute("msg", "사용자 정의 속성");
+		imgObj.setAttribute("data-msg", "사용자 정의 속성");
+		
+		pList.appendChild(imgObj);
+	}
+
+</script>
+</head>
+<body>
+	<button onclick="doAdd()">추가</button>
+	<div id="pList"></div>
+</body>
+</html>

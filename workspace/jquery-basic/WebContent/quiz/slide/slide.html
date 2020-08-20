@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <style>
+        * { margin:0px; padding:0px; }
+        
+        button {
+			margin: 5px;
+			font-size: 15px;
+			height: 30px;
+			border: none;
+			background-color: white;
+		}
+		
+        .animation_canvas  {
+            overflow:hidden;
+            position:relative;
+           	margin: 0 auto;           
+            width:600px; height:400px;
+        }
+    
+        .slider_panel { width:3600px; position:relative; }
+        .slider_image { float:left; width:600px; height:400px; }
+		
+		#center {
+			text-align: center;
+			margin-top: 80px; 
+			height:450px;
+		}
+		#abc {
+			height: 80px;		
+		}
+		.sideimg {
+			width: 100px;
+			height: 80px;
+		}
+		.down {
+			margin: 0 auto;
+			width: 600px;
+			height: 300px;
+		}
+		.downImg, #abc {
+			position: relative;
+			float: left;
+		}
+		.downImg {
+ 			overflow:hidden; 
+			width: 530px;
+			height: 80px;
+		}
+		.siba {
+			position:relative;
+			width: 800px;
+			height: 80px;
+		}
+		.textBorder {
+			border: 1px solid black;
+		}
+    </style>
+    <script src="../../js/jquery-3.1.0.js"></script>
+</head>
+<body>
+	<h2>슬라이드 쇼</h2>
+	<hr>
+	<div id="center">
+	슬라이드 쇼<select id="count">
+		<option value="1">1초</option>
+		<option value="2">2초</option>
+	</select> 
+	<button type="button" id = "autoStart">시작</button>
+	<button type="button" id = "autoStop">중지</button>
+	크기 : <button type="button" id= "sm">축소</button>
+	<button type="button" id="basicSize">기본크기</button>
+	<button type="button" id="imgSizeUp">확대</button>
+	<button type="button" id="firstImg">◀◀</button>
+	<button type="button" class="back">◀</button>
+	<span class = "textBorder"><span id = "imgCount">1</span>/6</span>
+	<button type="button" class="next">▶</button>
+	<button type="button" id="lastImg">▶▶</button>
+	    <div class="animation_canvas">
+	        <div class="slider_panel">
+	            <img src="Desert.jpg" class="slider_image"/>
+	            <img src="Hydrangeas.jpg" class="slider_image"/>
+	            <img src="Jellyfish.jpg" class="slider_image"/>
+	            <img src="Koala.jpg" class="slider_image"/>
+	            <img src="Lighthouse.jpg" class="slider_image"/>
+	            <img src="bbbb.jpg" class="slider_image"/>
+	        </div>
+	    </div>
+	    <div>
+	    </div>
+    </div>
+    <div class = "down">
+    	<button id="abc" class="back">◀</button>
+    	<div class = "downImg">
+    	<div class = "siba">
+    	<img src="Desert.jpg" class="sideimg" id="0"/>
+	    <img src="Hydrangeas.jpg" class="sideimg" id="1"/>
+	    <img src="Jellyfish.jpg" class="sideimg" id="2"/>
+	    <img src="Koala.jpg" class="sideimg" id="3"/>
+	    <img src="Lighthouse.jpg" class="sideimg" id="4"/>
+	    <img src="bbbb.jpg" class="sideimg" id="5"/>
+	    </div>
+	    </div>
+    	<button id="abc" class="next">▶</button>
+    </div>
+    <script>
+    	var index = 0;
+    	var goSlider;
+    	var size;
+    	imgborder(index);
+    	$("button:eq(0)").click(function() {
+    		var userValue = $("#count").val();
+    		console.log(userValue);
+    		if (userValue == 1) {
+    			goSlider = setInterval(function() {
+    				$('#next').trigger("click");
+    			}, 1000);
+    		} else {
+    			goSlider = setInterval(function() {
+    				$('#next').trigger("click");
+    			}, 2000);	
+    		}
+    	});
+    	$("#autoStop").click(function() {
+    		clearInterval(goSlider);
+    	});
+    	$("#sm").click(function () {
+    		var a = 10 * index;
+    		console.log(a);
+    		$(".animation_canvas").animate({
+    			width : "-=10",
+    			height : "-=10",
+    		},'fast');
+    		$(".slider_panel").animate({
+    			width  : "-=50",
+    			height : "-=10",
+    			left : "+=" + a
+    		},'fast');
+    		$(".slider_image").animate({
+    			width : "-=10",
+    			height : "-=10"
+    		},'fast');
+    		size = $(".slider_image").width();
+    	});
+    	$("#basicSize").click(function() {
+    		$(".animation_canvas").animate({
+    			width : "600",
+    			height : "400",
+    		},'fast');
+    		var sum = -(600 * index);
+    		console.log(sum);
+    		$(".slider_panel").animate({
+    			width :  "3600",
+    			height : "400",
+    			left : sum
+    		},'fast');
+    		$(".slider_image").animate({
+    			width : "600",
+    			height : "400"
+    		},'fast');
+    		size = 600;
+    	});
+    	$("#imgSizeUp").click(function() {
+    		var a = 10 * index;
+    		if (size < 600) {
+    			$(".animation_canvas").animate({
+        			width : "+=10",
+        			height : "+=10",
+        		},'fast');
+        		$(".slider_panel").animate({
+        			width :  "+=50",
+        			height : "+=10",
+        			left : "-=" + a
+        		},'fast');
+        		$(".slider_image").animate({
+        			width : "+=10",
+        			height : "+=10"
+        		},'fast');
+        		size = $(".slider_image").width();
+    		} else {
+    			alert("이미지 사이지 최대 크기");
+    		}
+    	});
+    	function moveSlider(index) {
+    		size = $(".slider_image").width();
+    		var move = -(index * size);
+    		$(".slider_panel").animate({left:move},'slow');
+    	}
+    	function downmoveSlider(index) {
+    		downsize = $(".sideimg").width();
+    		var downmove = -(index * downsize);
+    		$(".siba").animate({left:downmove},'slow');
+    	}
+    	$('.back').click(function () {
+    		if (index == 0) index = 5;
+    		else index --;
+    		if (index == 5 || index == 0) {
+    			downmoveSlider(index);
+    		}
+    		if (index == 4) {
+    			downmoveSlider(0);
+    		}
+    		$("#imgCount").html(index+1);
+    		imgborder(index);
+    		moveSlider(index);
+    	});
+    	$('.next').click(function () {
+    		if (index == 5) index = 0;
+    		else index ++;
+    		if (index == 5 || index == 0) {
+    			downmoveSlider(index);
+    		}
+    		$("#imgCount").html(index+1);
+    		imgborder(index);
+    		moveSlider(index);
+    	});
+    	$("#firstImg").click(function() {
+    		index = 0;
+    		imgborder(index);
+    		$(".slider_panel").animate({
+    			left : "0"
+    		},'slow');
+    		$("#imgCount").html(index+1);
+    	});
+    	$("#lastImg").click(function() {
+    		index = 5;
+    		var aaa = $(".animation_canvas").width();
+    		var sum = -(aaa * index);
+    		imgborder(index);
+    		$(".slider_panel").animate({
+    			left : sum
+    		},'slow');
+    		$("#imgCount").html(index+1);
+    	});
+    	function imgborder(index) {
+    		for (var i = 0; i < 6; i ++) {
+    			$("#"+i).removeAttr("style");
+    		}
+    		$("#"+index).css("border","3px solid red");
+    	}
+    	for (var i = 0; i < 6; i++) {
+    		$("#"+i).click(function () {
+    			index = $(this).index();
+    			moveSlider(index);
+    			imgborder(index);
+    		});
+    	}
+    	//moveSlider(0);
+    </script>
+</body>
+</html>

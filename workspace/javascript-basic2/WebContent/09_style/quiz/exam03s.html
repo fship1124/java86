@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	div {
+		position: absolute;
+		background-color: #000;
+		color: #fff;
+		padding: 10px;
+		font-size: 40px;
+		font-weight: bold;
+		width: 600px;
+		height: 400px;
+		left: 200px;
+		top: -420px;
+	}
+	#d1 {
+		background-color: yellow;
+	}
+	#d2 {
+		background-color: orange;
+	}
+	#d3 {
+		background-color: tomato;
+	}
+	#d4 {
+		background-color: red;
+	}
+	#d5 {
+		background-color: purple;
+	}
+</style>
+<script>
+	var count = 1;
+	var curCnt = 0;
+	var x = -400;
+	var y = 100;
+	function showNextSlide() {
+		if (count > 5) {
+			alert ("다음 슬라이드가 없습니다.");
+			return;
+		} 
+		var objId = "#d" + count;
+
+		x += 30;
+		var obj = document.querySelector(objId);
+		obj.style.top = x + "px";
+		if (x < 100) {
+			setTimeout(showNextSlide, 100);
+		} else {
+			x = -400;
+			curCnt = count++;
+		}
+	}
+	function showPrevSlide() {
+		if (curCnt < 1) {
+			alert ("이전 슬라이드가 없습니다.");
+			return;
+		}
+		
+		var objId = "#d" + curCnt;
+
+		y -= 30;
+		var obj = document.querySelector(objId);
+		obj.style.top = y + "px";
+		if (y >= -420) {
+			setTimeout(showPrevSlide, 100);
+		} else {
+			y = 100;
+			count = curCnt--;
+		}
+	}
+</script>
+</head>
+<body>
+	<p><a href="#" onclick="showPrevSlide()">이전 슬라이드</a>  <a href="#" onclick="showNextSlide()">다음 슬라이드</a></p>
+	<div id="d1">슬라이드 1번</div>
+	<div id="d2">슬라이드 2번</div>
+	<div id="d3">슬라이드 3번</div>
+	<div id="d4">슬라이드 4번</div>
+	<div id="d5">슬라이드 5번</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>ServletJsp</display-name>
+
+  <!-- 필터 클래스 등록 -->
+  <filter>
+  	<!-- post방식에 대한 한글처리, get방식은 톰캣서버에서 자동으로 한글처리됨 -->
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>  
+  </filter-mapping>
+  
+  <servlet>
+  	<!-- .do 로 호출될 경우 해당 : .xml 을 해석해서 적용해라 라고 명령해주는 태그. contextConfigLocation이름으로 정보를 넘겨줌 -->
+  	<servlet-name>dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>
+  			classpath:config/spring/context-*.xml
+  		</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>dispatcher</servlet-name>
+	<url-pattern>*.do</url-pattern>  
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>dispatcher</servlet-name>
+	<url-pattern>*.json</url-pattern>  
+  </servlet-mapping>  
+  
+  <!-- 서버가 첫 실행시 아래 경로를 찾아서 시작페이지로 인식 -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

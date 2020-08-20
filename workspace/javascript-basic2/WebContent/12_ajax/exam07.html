@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AJAX</title>
+<script src="../11_lib/framework.js"></script>
+</head>
+<body>
+	<h1>서버에서 받은 메세지</h1>
+	<div id="result"></div>
+	<br>
+	<button>Ajax 호출</button>
+	
+<script>
+	function responseMsg() {
+		if (xhr.readyState == 4) {   // 모든 응답이 서버에서 왔을때
+			if (xhr.status == 200) {  // 정상 수행되었을 때
+				$("#result").html(xhr.responseText);
+			}
+		}
+	}; 
+
+	$("button").click(function () {
+		$.ajax({
+			url: "hello.jsp", 
+			success: responseMsg
+		});
+	});
+</script>
+</body>
+</html>

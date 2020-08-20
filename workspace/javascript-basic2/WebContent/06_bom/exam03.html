@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+// 바디가 실행되기 전 스크립트가 실행되었기 때문에 오류 이때 실행 시점을 조정할 수 잇다.
+// 자바스크립트에 on이 붙으면 이벤트와 관련됨.
+// window onload가 되었을때 자동으로 함수 실행
+    window.onload = function() {
+	//window.document 
+	var h1Obj = document.getElementById("result");
+	
+	h1Obj.innerHTML = "테스트";
+};
+</script>
+<body>
+	<h1 id="result"></h1>
+	
+</body>
+</html>

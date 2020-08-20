@@ -1,0 +1,39 @@
+<!-- window.onload = function () {};
+window.onload 기능 대체
+$(document).ready(function)
+단축된 표현 $(function)
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="../js/jquery-3.1.0.js"></script>
+	<script>
+	
+	// 이미지가 있다면 이미지 로딩된 후 그림이 그려진 후 실행
+	window.onload = function () {
+		var h1obj = document.querySelector("h1");
+		alert("3 : " + h1obj.innerHTML);
+	};
+	
+	// 반면, jquery에 있는 실행문(1,2)들은 다운로드 되기 전에 실행
+	// 1. 2. 은 window.onload 를 대체
+	// 1. 윈도우가 로딩될때 실행
+	$(function () {
+		alert("1 : " + $("h1").html());
+	});
+	
+	// 2. html 태그가 다 로딩된 다음 실행 : 실행할 함수를 ready() 안에 넣어준다.
+	$(document).ready(function () {
+		alert("2 : " + $("h1").html());
+	});
+	
+	</script>
+<script>
+</script>
+</head>
+<body>
+	<h1>jQuery란?</h1>
+</body>
+</html>

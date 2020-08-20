@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="daum.js"></script>
+</head>
+<body>
+    <h2>다음 블로그</h2>
+    <div id="a"></div>
+    
+<script>
+	
+	var daumblog = document.getElementById("a");
+	
+	var html = "<table>";
+	html += "<tr>";
+	html += "<th>작가</th>";
+	html += "<th>제목</th>";
+	html += "<th>링크</th>";
+	html += "</tr>";
+	var itemArr = blog.channel.item;
+	console.dir(itemArr);
+	
+	for (var i = 0; i < itemArr.length; i++) {
+		var item = itemArr[i];
+		html += "<tr>";
+		html += "<td>" + item.author + "</td>";
+		html += "<td>" + item.title + "</td>";
+		//html += "<td><a href='" + item.link + "'>이동</a></td>";
+		html += "<td><a href='"+item.link+"'>이동</a></td>";
+		html += "</tr>";
+	}
+	html += "</table>";
+	
+	daumblog.innerHTML = html;
+	
+	
+</script>    
+</body>
+</html>

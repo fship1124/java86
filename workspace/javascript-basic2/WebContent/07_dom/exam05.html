@@ -1,0 +1,30 @@
+<!-- 
+	innerHTML 적용
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function doAdd() {
+		// 결과물 : <div id="pList"><h1>테스트</h1></div>
+		var pList = document.getElementById("pList");
+		
+// 		pList.innerHTML = pList.innerHTML + "<h1>테스트</h1>";
+		pList.innerHTML += "<h1>테스트</h1>";
+		
+		/*
+		var html = "<h1>테스트</h1>";
+		pList.innerHTML += html;
+		*/
+		
+	}
+
+</script>
+</head>
+<body>
+<button onclick="doAdd()">추가</button>
+<div id="pList"></div>
+</body>
+</html>

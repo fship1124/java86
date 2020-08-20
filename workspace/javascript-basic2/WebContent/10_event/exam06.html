@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style >
+	div, h1 { border: 3px solid black; margin: 30px; }
+</style>
+</head>
+<body>
+	<div onclick="debug('가장 바깐쪽 DIV')">
+		<div onclick="debug('안쪽 DIV')">
+			<h1 onclick="debug('H1')">
+				이벤트 전파 확인
+			</h1>
+		</div>
+	</div>
+	<div id="debug"></div>
+	
+	<script>
+	// 나를 감싸고 있는 부모들이 동일한 이벤트가 있을경우 자식을 호출했을때 자동으로 부모의 이벤트까지 호출
+	// true flse값에 따라 호출되는 순서가 다르다 :   자식->부모 : 버블링 방식, 부모->자식: 캡처링 방식
+		function debug(msg) {
+			var debug = document.querySelector("#debug");
+			debug.innerHTML += msg + "<br>";
+		}
+	
+	</script>
+</body>
+</html>

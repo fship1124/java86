@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	div {
+		width: 1000px;
+		height: 200px;
+		border: 5px solid tomato;
+	}
+</style>
+</head>
+<body>
+	<h1>이미지를 드래그 하세요</h1>
+	<div id="div1" >
+		<img id="img1" src="pic1.jpg" width="300" height="180" draggable="true" 
+			 ondragstart="imgDragStart(event);" />
+		<img id="img2" src="pic2.jpg" width="300" height="180" draggable="true" 
+			 ondragstart="imgDragStart(event);" />
+	</div>
+	<br>
+	<div id="div2" ondragover="return false;" ondrop="imgDrop(event);" >
+	
+	</div>
+	
+	<script>
+	var dragId;
+		function imgDragStart(event) {
+			dragId = event.targer.id;
+			event.dataTransfer.setData("imgId", event.targer.id);
+		}
+		
+		function imgDrop(event) {
+			var dropId = event.target.id;
+			var imgID = event.dataTransfer.getData("imgId");
+			
+			console.log("target.id : " + event.target.id);
+			console.log("target.nodeName : " + event.target.nodeName);
+			console.log("data : " + imgID);
+			
+			if (event.targetnodeName.toLowerCase() == 'img') {
+				return;
+			}
+			
+			event.target.appendChild(document.querySelector("#" + imgId).cloneNode()
+			);		
+		}
+		
+	
+	</script>
+</body>
+</html>

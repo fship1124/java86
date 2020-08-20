@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+    #cube {
+/*     부모를 만들어서 그안에서 위치하게끔 한다(절대좌표를 기준으로 하므로 relative)  position: relative; */
+        position: relative;
+        width: 200px;  height: 200px;
+        left: 400px;   top: 100px;
+        
+        /* 자식의 3차원 속성을 지원 */
+        transform-style: preserve-3d;
+        
+        /* 애니메이션 동작 */
+        animation: mycube 20s infinite;
+        
+        perspective: 600px;
+    }
+    
+    @keyframes mycube {
+        from { transform: rotateX(-30deg) rotateY(0deg) }
+        to { transform: rotateX(-30deg) rotateY(360deg) }
+    }
+    
+    img {
+        position: absolute;
+        left: 0px; top: 0px;
+        width: 200px;  height: 200px;
+        border: 1px solid tomato;
+        font-size: 40px;
+        text-align: center;
+        line-height: 200px;
+    }
+    img:nth-child(1) {  transform: rotateY(0deg) translateZ(200px) }
+    img:nth-child(2) {  transform: rotateY(60deg) translateZ(200px) }
+    img:nth-child(3) {  transform: rotateY(120deg) translateZ(200px) }
+    img:nth-child(4) {  transform: rotateY(180deg) translateZ(200px) }
+    img:nth-child(5) {  transform: rotateY(240deg) translateZ(200px) }
+    img:nth-child(6) {  transform: rotateY(300deg) translateZ(200px) }
+    
+    
+</style>
+</head>
+<body>
+    <h1>큐브</h1>
+    <div id="cube">
+        <img src="../images/pic4.jpg"/>
+        <img src="../images/pic3.jpg"/>
+        <img src="../images/pic2.jpg"/>
+        <img src="../images/pic1.jpg"/>
+        <img src="../images/pic4.jpg"/>
+        <img src="../images/pic4.jpg"/>
+    </div>
+</body>
+</html>

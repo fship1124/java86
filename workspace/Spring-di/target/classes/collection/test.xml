@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:p="http://www.springframework.org/schema/p" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+                           
+	<bean id="ham" class="collection.HamSand" />
+	<bean id="cheese" class="collection.CheeseSand" />
+	<bean id="egg" class="collection.EggSand" />
+	
+	<!-- public void setSandList(List<ISand> sandList) {
+		this.sandList = sandList;
+		} -->
+	<bean id="menu" class="collection.Menu" >
+		<property name="sandList"> 
+			<list>
+				<ref bean="ham" />
+				<ref bean="cheese" />
+				<ref bean="egg" />
+			</list>
+		</property>
+		<property name="sandSet">	<!-- property는 set메소드 호출 -->
+			<set>					<!-- 매개변수를 찾는것  -->
+				<ref bean="ham" />	<!-- 객체타입을 받는것  -->
+				<ref bean="cheese" />
+				<ref bean="egg" />
+			</set>
+		</property>
+		<property name="sandMap">
+			<map>
+				<entry key="ham" value-ref="ham" />
+				<entry key="cheese" value-ref="cheese" />
+				<entry key="egg" value-ref="egg" />
+			</map>
+		</property>
+		<property name="sandProp">
+			<props>
+				<prop key="ham">햄 샌드위치</prop>
+				<prop key="cheese">치즈 샌드위치</prop>
+				<prop key="egg">계란 샌드위치</prop>
+			</props>
+		</property>
+	</bean>
+	
+</beans>	

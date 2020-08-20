@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		function argFunc () {
+			if ( 1 == arguments.length) {
+				console.log("매개변수 : " + arguments[0]);
+			} else {
+				console.log("잘못된 인수의 개수 입니다.");
+			}
+		}
+		/*
+		function argFunc (num) {
+			if ( 1 == arguments.length) {
+				console.log("매개변수 : " + num);
+			} else {
+				console.log("잘못된 인수의 개수 입니다.");
+			}
+		}
+		*/
+		
+		argFunc(1); // 매개변수 : 1
+		argFunc(1, 2); // 잘못된 인수의 개수 입니다.
+	</script>
+</body>
+</html>

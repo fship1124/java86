@@ -1,0 +1,60 @@
+<!-- 적용시키고자할 내용을 $(앞)에 주고 위치를 $(앞).append(뒤)에 준다. 순서가 바뀜
+** insert + after,before
+after   : 선택자 뒤에 추가
+before  : 선택자 앞에 추가
+** append, prepend + To
+append  : 선택자 엘리먼트 내용의 뒤에 추가
+prepend : 선택자 엘리먼트 내용의 앞에 추가
+
+replaceWith : 해당 선택자를 완전히 변경
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>css selectors</title>
+<style type="text/css">
+	p {
+		font-weight:bold;
+		font-size:30px;
+		color:blue;
+		margin:10 10;
+		padding:2px;
+		border: 2px solid orange;
+	}
+	b {
+		font-size:30px;
+	}
+</style>
+<script src="../js/jquery-3.1.0.js"></script>
+<script>
+	var cnt = 1;
+	function after() {
+// 		$("#p2").after("<b>"+ cnt++ +"</b>");
+		$("<b>"+ cnt++ +"</b>").insertAfter("#p2");
+	}
+	function before() {
+// 		$("#p2").before("<b>"+ cnt++ +"</b>");
+		$("<b>"+ cnt++ +"</b>").insertBefore("#p2");
+	}
+	function append() {
+// 		$("#p2").append("<b>"+ cnt++ +"</b>");
+		$("<b>"+ cnt++ +"</b>").appendTo("#p2");
+	}
+	function prepend() {
+// 		$("#p2").prepend("<b>"+ cnt++ +"</b>");
+		$("<b>"+ cnt++ +"</b>").prependTo("#p2");
+	}
+</script>
+</head>
+<body>
+	<p>p태그-1</p>
+	<p id="p2">p태그-2</p>
+	<p>p태그-3</p>
+	
+	<button onclick="after()">insertAfter()</button>
+	<button onclick="before()">insertBefore()</button>
+	<button onclick="append()">appendTo()</button>
+	<button onclick="prepend()">prependTo()</button>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function getHtml(type) {
+		
+		switch (type) {
+		case "text" : return "문자열 : <input type='text' >";
+		case "password" : return "비밀번호 : <input type='password' >";
+		case "check" : return "<input type='checkbox' name='체크박스' >체크박스";
+		case "radio" : return " <input type='radio' >라디오버튼";
+		case "button" : return "<input type='button' value='버튼' >";
+		case "select" : 
+			var innerHTML = "<select name='select'>";
+			innerHTML += "<option value='1' >콤보박스 -> 1</option>";
+			innerHTML += "<option value='2' >콤보박스 -> 2</option>";
+			innerHTML += "<option value='3' >콤보박스 -> 3</option>";
+			innerHTML += "<option value='4' >콤보박스 -> 4</option>";
+			innerHTML += "<option value='5' >콤보박스 -> 5</option>";
+			return innerHTML;
+		}	
+	}
+	
+	
+	function add(type) {
+		var myDiv = document.querySelector("#myDiv");
+		var div   = document.creatElement("div");
+			div.innerHTML = getHtml(type);
+		myDiv.appendChild(div);	
+	}
+	
+
+</script>
+</head>
+<body>
+    <div id="myDiv"></div>
+	<div>
+		<ul>
+			<li><a href="#" onclick="add('text')">문자열 박스 생성</a>
+			<li><a href="#" onclick="add('password')">비밀번호 박스 생성</a>
+			<li><a href="#" onclick="add('checkbox')">체크 박스 생성</a>
+			<li><a href="#" onclick="add('radio')">라디오 버튼 생성</a>
+			<li><a href="#" onclick="add('button')">버튼 생성</a>
+			<li><a href="#" onclick="add('select')">콤보 박스 생성</a>
+		</ul>
+	</div>
+	<br />
+</body>
+</html>

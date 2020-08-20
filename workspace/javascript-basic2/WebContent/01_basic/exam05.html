@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+// 	호이스팅(hoisting) : 코딩할때 선언된 변수,함수를 블락의 맨위쪽으로 끌어올리는 과정
+//                        (코딩시 2가지로 컴파일, 컴파일된걸 실행할때로 구분되는데)
+// 	그리하여 하단코드가 실행이 됨
+	console.log(id);
+	var id = "테스터";
+	console.log(id);
+
+	/* 호이스팅 결과
+	var id;
+	
+	console.log(id);
+	var id = "테스터";
+	console.log(id);
+	*/
+	
+</script>
+</body>
+</html>

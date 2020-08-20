@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 스키마 방식 -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"	    
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"	    
+	xmlns:tx="http://www.springframework.org/schema/tx"	    
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+	<!-- 트랜잭션 사용에 추가되는 사항 -->
+	<aop:aspectj-autoproxy />
+	
+	<!-- mybatis 객체 준비 -->
+	<context:property-placeholder 
+		location="classpath:config/mybatis/db.properties"/>
+
+	<!-- DBCP: db 커넥션 풀 사용
+	 -->	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		  destroy-method="close"
+      	  p:driverClassName="${jdbc.oracle.driver}"
+          p:url="${jdbc.oracle.url}"
+          p:username="${jdbc.oracle.username}" 
+          p:password="${jdbc.oracle.password}" />
+	
+	<!-- 트랜잭션 처리
+	 -->
+	<!-- DataSourceTransactionManager: db연결에 대한 트랜잭션을 관리하겠다. 연결된 db를 트랜잭션관리하겠다라고 해석 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- tx:advice태그는 공통기능에 대한걸 나타냄(transactionManager을 공통기능으로 관리하겠다) -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	    <tx:attributes>
+	    	<!-- Exception이 발생하면 즉,Exception 자식들의 예외들이면.. 롤백하겠다.  모든(*) 메서드에 적용 -->
+		    <tx:method name="*" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!--  -->
+	<aop:config>
+		<!-- 어떤클래스에 어떤타입을 적용할지..위치.. 
+		(public * member..*Impl.*(..):접근제한자가 public인 반환타입상관업없이 멤버로 시작되는 패키지밑에(상위패키지..:유연하게 사용시.0개이상의 패키지/상위패키지.:바로밑의 패키지만 대상이 됨) Impl끝나는 메서드(0개이상의 매개변수가 올수있음) 
+		그래서 클래스 이름을 모두 Impl로 끝나게 주면 트랜잭션 관리 대상이 될 수 있음-->
+		<aop:pointcut id="tranMethod"
+		              expression="execution(public * kr.co.mlec..*ServiceImpl.*(..)) "/>
+		<!-- advice-ref 정보..txAdvice를  pointcut-ref 참조..해서 사용하겠다. -->             
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="tranMethod" />
+	</aop:config>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="kr.co.mlec.repository.vo" />
+<!-- 		<property name="configLocation" value="classpath:config/mybatis/sqlMapConfig.xml" />		 -->
+		<property name="mapperLocations" value="classpath:config/sqlmap/oracle/*.xml" />			
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+</beans>

@@ -1,0 +1,61 @@
+<!-- 
+	select options 항목의 동적인 추가/삭제
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ 	<form name="mForm">
+ 	<button type="button" onclick="add();">추가</button>
+ 	<button type="button" onclick="del();">삭제</button>
+	<select name="testBox">
+		<option value="">선택하세요</option>
+	
+	</select>
+ 	</form>
+ 	<script>
+ 		function add() {
+ 			var selObj = document.mForm.testBox;
+ 			
+ 			/*
+ 				option 추가하는 3가지 방법
+ 			*/
+ 			
+ 			/*
+ 			// 1번 : options 배열을 활용, Option 객체
+ 			var optArr = selObj.options;
+ 			optArr[optArr.length] = new Option("Option-" + optArr.length, optArr.length);
+ 			*/
+ 			
+ 			// 2번 방식 : Dom API 활용
+ 			/*
+ 			// <option></option>
+ 			var optArr = selObj.options;
+ 			var optEle = document.createElement("option");
+ 			
+ 			//<option value="1"></option>
+ 			optEle.value = optArr.length;
+ 			var optText = document.createTextNode("Option-" + optArr.length);
+ 			
+ 			//<option>Option-1</option>
+ 			optEle.appendChild(optText);
+ 			
+ 			//<select>..<option value="1">Option-1</option></select>
+ 			selObj.appendChild(optEle);
+ 			*/
+ 			
+ 			// 3번 방식 : innerHTML 방식
+ 			var optArr = selObj.options;
+ 			selObj.innerHTML += "<option value='" + optArr.length + "'>Option-" + optArr.length + "</option>"; 
+ 		}
+ 		function del() {
+ 			var selObj = document.mForm.testBox;
+ 			selObj.options.length = 1;
+ 		}
+ 	
+ 	</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#asd {
+		background: gray;
+		width: 200px;
+		height: 200px;
+		color: white;
+		font-size: 20px;
+		float: left;
+	}
+	input {
+		margin-top: 20px;
+		margin-left: 20px;
+	}
+	#textAdd {
+		border: 5px solid red;
+		width: 600px;
+		height: 100px;
+		float: left;
+		margin-left: 30px;
+	}
+
+</style>
+</head>
+<body>
+	<div id="asd">
+		<input type="checkbox" id="title1" name="title" onclick='textAdd("JAVA")' value="JAVA"/>
+			<label for="title1">JAVA</label><br>
+		<input type="checkbox" id="title2" name="title"/>
+			<label for="title2">SQL</label><br>
+		<input type="checkbox" id="title3" name="title"/>
+			<label for="title3">HTML</label><br>
+		<input type="checkbox" id="title4" name="title"/>
+			<label for="title4">CSS</label><br>
+		<input type="checkbox" id="title5" name="title"/>
+			<label for="title5">JAVASCRIPT</label>
+	</div>
+	<div id="textAdd"></div>
+</body>
+
+<script>
+	function textAdd(type) {
+		alert("1");
+		alert(type);
+		
+		var divLan = document.getElementById("textAdd");
+		
+		var div = document.createElement("div");
+		var spanObj = document.createElement("span");
+		var text = document.createTextNode(type);
+		spanObj.appendChild(text);
+		var btn = document.createElement("button");
+		var textX = document.createTextNode("x");
+		btn.appendChild(textX);
+		
+		div.appendChild(spanObj);
+		div.appendChild(btn);
+		divLan.appendChild(div);
+		
+		div.setAttribute("id", "subJAVA");
+		btn.setAttribute("method", "del()");
+		
+	}		
+		
+	function del() {
+		
+	}
+		
+		
+		
+// 		divLan.appendChild(btn);
+// 		btn.appendChild(textX);
+		
+		
+// 		var labTest = document.querySelector();
+		
+// 		var h1Obj = document.createElement("h1");
+// 		var text = document.createTextNode(title);
+// 		switch (type) {
+// 		case "1" :  
+// 		}
+
+// 		var tAddDiv = document.getElementById("textAdd");
+// 		h1Obj.appendChild(text);
+// 		tAddDiv.appendChild(h1Obj);
+		
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

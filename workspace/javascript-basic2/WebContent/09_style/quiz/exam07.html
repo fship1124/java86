@@ -1,0 +1,76 @@
+<!-- 어코디언 기능 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	h3, div {
+		margin: 0px;
+		padding: 5px;
+		width: 500px;
+		border: 2px solid #334455;
+		box-sizing: border-box;
+	}
+	
+	h3 {
+		background-color: pink;
+	}
+	
+	div {
+		position: absolute;
+		height: 160px;
+		clip: rect(30px, 300px, 60px, 0px);
+	}
+	
+</style>
+</head>
+<body>
+	<h2>어코디언 기능 구현</h2>
+	<h3 onclick="doAction();">오늘은 자바스크립트 CSS</h3>
+	<div>
+		오늘은 자바스크립트 CSS 적용하는 날<br>
+		오늘은 자바스크립트 CSS 적용하는 날<br>
+		오늘은 자바스크립트 CSS 적용하는 날
+	</div>
+	
+	<script>
+		var bottom = 160;
+		function doAction() {
+			var divObj = document.querySelector("div");
+			
+			if(bottom == 0){
+				id = setInterval(function () {
+					bottom += 16;
+					var clip = "rect(0px, 500px,)"
+				}, 100);
+			}
+			else {
+				
+			}
+			
+			var heigth = document.defaultView.getComputedStyle(divObj, null).getPropertyValue("heigth");
+			
+			for (var bottom = 0; bottom < 160; bottom++10) {
+				divObj.styleObj.clip =  "rect(30px, 300px," + heigth - i + "px, 0px";
+			}
+			
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

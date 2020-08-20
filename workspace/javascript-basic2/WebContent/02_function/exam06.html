@@ -1,0 +1,38 @@
+<!-- 
+	내부 함수 : 함수내에 포함된 함수
+	
+	특징
+	- 선언된 외부함수 내에서만 호출이 가능함
+	
+	형태
+	- function outerFunc() {
+		function innerFunc() {
+		
+		}
+		innerFunc(); (호출 가능)
+	}
+	
+	innerFunc(); (에러발생)
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		function outerFunc() {
+			function innerFunc(msg) {
+				console.log(msg);
+			}
+			innerFunc("하이~"); 
+		}
+// 		에러메시지 defined : 함수자체가 정의되지 않았다는 표현이라고도 봄
+		outerFunc();
+		
+		innerFunc(); 
+	</script>
+	
+</body>
+</html>

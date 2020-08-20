@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:component-scan base-package="kr.co.mlec" />
+
+	<mvc:annotation-driven>
+	
+		<mvc:message-converters>    <!-- 메시지가 converters -->
+		<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+			<property name="supportedMediaTypes">  <!-- class에 해당 name 메소드가 있음. 메소드의 매개변수가 list형태로 되어있음. -->
+				<list>
+					<value>text/html; charset=UTF-8</value>
+				</list>
+			</property>
+		</bean>
+		
+		<!-- 객체들을 json형태로 바꿔주기위해 설정 -->
+		<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> <!--해당라이브러리는 객체내용을 자동으로 json형태로 바꿔줌-->
+			<property name="supportedMediaTypes">
+				<list>
+					<value>text/html; charset=UTF-8</value>
+					<value>application/json; charset=UTF-8</value>
+				</list>
+			</property>
+		</bean>
+
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+		<mvc:interceptors>
+			<mvc:interceptor>
+				<mvc:mapping path="/interceptor/**" />     <!-- Ant표현식의 경로찾기중 -** 0개이상의 값들이 올수있다 : 2개이상의 경로가 올수 있다. -->    
+				<mvc:exclude-mapping path="/interceptor/login*.do" />  <!-- exclude-mapping : 에 설정한 경로만 빼고 실행하세요 -->
+				<bean class="kr.co.mlec.interceptor.AuthInterceptor" />
+			</mvc:interceptor>
+		</mvc:interceptors>
+		
+		<bean id="multipartResolver" class= "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<!-- 최대 업로드 파일 사이즈 : 10MB -->
+			<property name="maxUploadSize" value="10485760" />  <!--  -->
+		</bean>
+	
+	
+	<!-- view-name : jsp 파일명 -->
+	<mvc:view-controller path="/file/uploadForm.do" view-name="file/fileUploadForm"/>
+	
+	
+	<!-- 화면찾는 화면지정 -->
+	<mvc:default-servlet-handler />
+	<!-- jsp 찾는 방식  prefix:시작지점에 붙음 / suffix:끝나는지점에 붙음-->
+	<mvc:view-resolvers>
+		<!-- prefix="/WEB-INF/jsp/" 공통디렉토리 설정. view의 경로를 작성할때 prefix와 suffix 를 제외한 나머지 주소를 작성 -->
+		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
+	</mvc:view-resolvers>
+</beans>

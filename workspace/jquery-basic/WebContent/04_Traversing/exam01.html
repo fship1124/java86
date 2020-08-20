@@ -1,0 +1,85 @@
+<!-- 
+	add : 확장 집합 추가(선택한것을 더 확장하고 싶다면)
+	children( ) : 모든 자식(현재선택한 선택자의 모든자식)
+	children("span") : 자식 중 span 만 선택(현재선택한 선택자의 특정한자식)
+	
+	end() : 이전 확장 집합(현재확장집합의 이전으로 돌아가고 싶을때)
+	filter("선택자") : 현재 집합에서 일부집합 추출(나열되어있는 집합에서 선택한 집합으로 축소해서 나열하고 싶을때)
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>add, child, end, filter</title>
+<style type="text/css">
+	div {
+		width: 60px;
+		height: 60px;
+		margin: 10px;
+		float:left;
+		font-size: 30px;
+		font-weight:bold;
+	}
+	p {
+		clear: left;
+		font-weight:bold;
+		font-size: 30px;
+		margin:20px 10px;
+	}
+	input[type=button] {
+		font-size: 20px;
+		font-weight: bold;
+		width: 150px;
+		height: 40px;
+	}
+</style>
+<!-- 3버전
+	<script src="../js/jquery-3.1.0.js"></script> 
+	-->
+<!-- children() 사용 라이브러리 -->
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+	function add() {
+		/*
+		$("div").css("background", "yellow");
+		$("div, p").css("color", "tomato");
+		*/
+		// 위와 똑같음(기존의 선택된 것에 확장하여 변경??)
+		$("div").css("background", "yellow")
+				.add("p")
+		        .css("color", "tomato");
+	}
+	function child() {
+		$("div").css("background", "yellow")
+				.children("span")
+				.css("color", "tomato");
+	}
+	function end() {
+		// 11개 자식
+		// children() : 3버전 실행 안됨
+		alert($("body").children().size());
+		// .children().children("span").end() : 현재 확장집합(span) 이전집합
+		alert($("body").children().children("span").size());
+		alert($("body").children().children("span").end().size());
+		
+	}
+	function filter() {
+		// 현재 집합체("div")에서  :gt(0) 이후에 적용
+		$("div").filter(":gt(0)").css("color", "skyblue");
+	}
+</script>
+</head>
+<body>
+	<div>div<span>1</span></div>
+	<div>div<span>2</span></div>
+	<div>div<span>3</span></div>
+	<div>div<span>4</span></div>
+	<div>div<span>5</span></div>
+	<div>div<span>6</span></div>
+	<p>add, child, end, filter</p>
+	<input type="button" value="add()" onclick="add()" />
+	<input type="button" value="child()" onclick="child()" />
+	<input type="button" value="end()"    onclick="end()"    />
+	<input type="button" value="filter()" onclick="filter()" />
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!-- 
+	자바스크립트에서 this는 호출하는 대상에 영향을 받는다.
+	객체안에서의 this는 객체 자신을 나타낸다.
+	
+	with (객체) {
+	
+	}
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	var member = {
+			id: "hohg",
+			setId: function (id) {
+				this.id = id;
+			}, 
+			getId: function () {
+				return this.id;
+			}
+	};
+	
+	console.log(member.getId());
+	// member가 setId를 호출하였기 때문에 this는 member가 된다. 
+    // 	함수안에 this가 아니라 객체 안에 this가 된다.
+	member.setId("kim");
+	console.log(member.getId());
+	
+	// with를 사용하게 되면 member 객체에 바로 접근할 수 있다.
+	with(member) {
+	console.log(getId());
+	setId("kim")
+	console.log(getId());
+	}
+	
+</script>
+</body>
+</html>

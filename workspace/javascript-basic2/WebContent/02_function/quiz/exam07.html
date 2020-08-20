@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+    div { 
+    margin: 0 auto; 
+    width: 500px;
+}
+	button {	
+	    background-color: red;
+	    font-size: 30px;
+	    color: white;
+		width: 200px; 
+		height: 80px; 
+		float: left;
+		margin: 20px;
+		box-shadow: 0px 5px 5px 0px black;
+		border-top-left-radius: 20px;		
+		border-top-right-radius: 20px;		
+		border-bottom-left-radius: 20px;		
+		border-bottom-right-radius: 20px;		
+}
+
+	#time { 
+	width: 500px; 
+	height: 150px; 
+	background-color: black; 
+	color: white; 
+}
+
+
+</style>
+</head>
+<body>
+	<div>
+	    <button onclick="showTime()" id = "start">시작</button>
+	    <button onclick="showtimeclose()" id = "stop">정지</button>
+	</div>
+	<h1 id="time"></h1>
+
+<script>
+    var time;
+	function showtime () {
+		var currentDate = new Date();
+		time = document.getElementById("time");
+		
+		time.innerHTML = currentDate.toLocaleTimeString(); 
+	}
+	
+	function showtimeclose () {
+	setTimeout(showTime, 1000);
+	}
+</script>	
+</body>
+</html>

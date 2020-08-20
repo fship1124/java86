@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="../js/jquery-3.1.0.js"></script>
+</head>
+<body>
+        <!-- form 에 action이 설정되어 있지 않으면 자기자신의 페이지로 새로고침 된다.-->
+    <form id="f">
+        ID : <input type="text" id="name" /><br />
+        PASS : <input type="password" id="pass" /><br />
+        <!-- 버튼에 type 속성이 없을 경우 submit 이벤트 발생 -->
+        <button >로그인</button>
+    </form>
+    
+    <script>
+    	$("#f").submit(function (event) {
+    		alert("호출됨...");
+    		
+    		event.preventDefault();
+    		// return false;  줘도 됨
+    	});
+    
+    </script>
+</body>
+</html>

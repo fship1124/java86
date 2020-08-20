@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	div { background: #334455; }
+
+</style>
+</head>
+<body>
+	<div style="width: 200px; height: 200px">
+		<p>DIV CSS</p>
+	</div>
+	
+	<script>
+		var divObj = document.querySelector("div");
+		console.log("width", divObj.style.width);
+		console.log("height", divObj.style.height);
+		console.log("background", divObj.style.background);
+	
+		// (스타일을 얻고자하는 대상객체, )
+		//document.defaultView.getComputedStyle(divObj, null).getPropertyValue("얻고자하는 속성명");
+		// 디폴트값으로 설정되어 잇는 객체를 얻고자 할때 사용
+		var backVal = 
+			document.defaultView.getComputedStyle(divObj, null).getPropertyValue("background");
+		console.log("background", backVal);
+	</script>
+</body>
+</html>

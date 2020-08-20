@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<video id="myVideo" width="720" height="480" controls="controls" poster="pic1.jpg" 
+		   autoplay="autoplay" loop="loop" >
+	<source src="Naruto.mp4">
+	</video>
+	
+	<div>
+		<input id="playRangebar" type="range" style="width: 720px;" />
+	</div>
+	<div>
+		<button id="play" >시작</button>
+		<button id="backward" >뒤로</button>
+		<button id="forward" >앞으로</button>
+		<button id="replay" >다시시작</button>
+		<input id="mute" type="checkbox" />음소거
+		<input id="volumeVideo" type="range" min="0" max="1" step="0.1" value="0.5" />
+		<span>음량조절</span>
+		<
+	</div>
+	
+	<div id="debug" ></div>
+	
+	<script >
+		// 실행중인 파일명
+		var btn;
+		var playBtn = document.querySelector("#play");
+		var video = document.querySelector("#myVideo");
+		
+		// 시작버튼, 중지버튼 클릭시
+		playBtn.onclick = function () {
+			// 일시중지 상태 일 경우 시작으로 변경
+			if (video.paused) {
+				video.play();
+				playBtn.innerHTML = "일시정지";
+			} else {
+				video.pause();
+				playBtn.innerHTML = "시작";
+			}
+		};
+		
+		// 앞으로 버튼 이벤트 처리
+		var forwardBtn = document.querySelector("#forward");
+		forwardBtn.onclick = function () {
+			video.currentTime += 10;
+		} 
+		
+		// 뒤로 버튼 이벤트 처리
+		var backwardBtn = document.querySelector("#backward");
+		backwardBtn.onclick = function () {
+			video.currentTime -= 10;
+		}
+		
+		// 다시시작 버튼 이벤트 처리
+		var replayBtn = document.querySelector("#replay");
+		replayBtn.onclick = function () {
+			video.play();
+		}
+		
+		// 음소거 이벤트 처리
+		var muteChk = document.querySelector("#mute");
+		muteChk.onclick = function () {
+			video.muted = !video.muted;
+		}
+		
+		// 볼륨 이벤트 처리
+		var volumeVideo = document.querySelector("#volumeVideo");
+		volumeVideo.onchange = function () {
+			video.volume = volumeVideo.value;
+			video.muted = !video.muted;
+		}
+		
+		// 전체화면 버튼 이벤트 처리
+		function fullscreen () {
+			if (video.requestFullscreen) {
+				video.requestFullscreen();
+			} else if (video.mozRequestFullscreen) {
+				video.mozRequestFullscreen();
+			} else if (video.msRequestFullscreen) {
+				video.msRequestFullscreen();
+			}
+		};
+		
+		var playbar = document.querySelector("#playRangebar");
+		video.addEventListener("timeupdate", function() {
+			playbar.setAttribute("max", parseInt(video.duration));
+			playbar.value = video.currentTime;
+		});
+		
+		
+		
+	
+	</script>
+
+</body>
+</html>

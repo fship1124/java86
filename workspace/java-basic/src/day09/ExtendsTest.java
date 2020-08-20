@@ -1,0 +1,59 @@
+/**
+ * 상속을 받는다고 무조건 부모의 속성 또는 메서드를 사용할 수 있는 것은 아니다.
+ * 접근제한자가 허용되어야 사용이 가능하다. 
+ * (private : 선언된 클래스에서만 직접 접근이 가능함)
+ */
+package day09;
+
+class Person {
+//	private String name;    // 자식클래스에서 접근 불가                 
+	String name;
+	int age;
+	
+	Person() {}
+	
+	Person(String name, int age) {
+		this.name = name;
+		this.age  = age;
+	}
+	
+	public String toString() {
+		return "name=" + name + ", age=" + age;
+	}
+}
+class Student extends Person {      //학생이라는 클래스는 퍼슨 클래스를 상속받았다
+	// 부모와 자식이 동일한 이름을 가지고 있을 경우
+	// 자신의 것을 먼저 접근한다.
+	// 이때 부모의 변수가 가려지게 되는데 이것을 쉐도우 변수라고 한다
+//	String name;
+	String no;   // 학번
+
+	Student () {}
+	
+	Student(String name, int age, String no) {
+		super(name, age);   //부모 클래스에 있는 생성자 호출할때 사용
+		this.no   = no;
+//		this.name = name;
+//		this.age  = age;
+	}
+	
+	public String toString() {
+		// 부모가 가지고 있는 변수 및 메서드에 접근하기 위해서
+		// super 카워드 사용함
+		return super.toString() + ",no=" + no;
+		
+		
+		// 먼저 자신 클래스에 있는 메서드를 호출하기 때문에
+		// stackOverflow 라는 오류는 stacks의 메모리가 한계가 왔다. 
+//		return toString() + ",no=" + no;
+//		return "name=" + name + ", age=" + age + ",no=" + no;
+	}
+}
+public class ExtendsTest {
+    public static void main(String[] args) {
+		Student s1 = new Student("홍길동", 22, "12345");
+		System.out.println(s1.toString());
+		s1.name = "홍"; 	
+		
+	}
+}

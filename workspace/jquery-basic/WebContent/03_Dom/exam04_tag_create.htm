@@ -1,0 +1,42 @@
+<!-- 태그생성 ("", {}) -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+	div {
+		margin: 30px;
+		font-size: 20px;
+		padding: 10px;
+		border : 5px solid orange;
+	}
+	input[type=button] {
+		margin-left: 30px;
+		height: 50px;
+	}
+	h1 {
+		background: tomato;
+	}
+</style>
+<script src="../js/jquery-3.1.0.js"></script>
+	<script>
+		var cnt = 1;
+		function test() {
+			// 태그를 만듦
+// 			$("<h1>" + cnt + "</h1>").appendTo("div");
+			
+			// 설정된 <h1></h1>태그가 .text(cnt++) 으로 인해 그대로 반환됨
+// 			$("<h1></h1>").text(cnt++).appendTo("div");
+			
+			//("<h1></h1>", {}) 으로 해당엘리먼트에 대해 속성추가
+			$("<h1></h1>", {width: 200, height: 200}).text(cnt++).appendTo("div");
+		}
+	</script>
+</head>
+<body>
+    <input type="button" value="create" onclick="test()" />
+	<div>
+	</div>
+	
+</body>
+</html>

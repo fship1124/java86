@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="text" name="input" />
+	<button id="check">중복확인</button>
+	<p>11</p>
+	
+	<script>
+		$("#check").click( function () {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if ( xhr.readyState == 4 ) {
+					if (xhr.status == 200 ) {
+						var result = JSON.parse(xhr.responseText);
+						
+					}
+				}
+			};
+			xhr.open("GET","/javascript-basic2/quiz/exam01?input=" + $("input").val(), true);
+			xhr.send(null);
+		});
+		
+	</script>
+</body>
+</html>

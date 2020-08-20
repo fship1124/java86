@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="framework.js"></script>
+</head>
+<body>
+	<h1>라이브러리 만들기</h1>
+	<div id="msg">메시지 출력</div>
+	<h1 class="cMsg">class 속성 접근1</h1>
+	<h1 class="cMsg">class 속성 접근2</h1>
+	<input type="text" id="hobby1" name="hobby" value="기본값" /><br>
+	<button id="btn">클릭</button>
+	<div id="msg_list"></div>
+	<script>
+	
+		// 이벤트
+		/*
+		<button id="btn" onclic="doAction()">클릭</button>
+		
+		var btn = document.querySelector("#btn");
+		btn.onclick = function () {};
+		<button id="btn">클릭</button>
+
+		var btn = document.querySelector("#btn");
+		btn.addEventListener("click", function () {});
+		*/
+		
+		// 간소화된 이벤트 함수
+		$("#btn").click(function () { alert("클릭"); });
+		
+// 		$("#btn").on("click", function () { alert("클릭"); });
+		
+		/*
+		$("#btn").on({
+			"click": function () {},
+			"mousedown": function () {}
+		});
+		*/
+	
+		
+		/* 엘리먼트 추가
+		$("#msg_list").appendChild($("<div>").html("<h1>테스트</h1>"));
+		$("#msg_list").append($("<div>").html("<h1>테스트</h1>"));
+		*/
+	
+		/* 태그 생성
+		var msgList = document.querySelector("#msg_list");
+		
+		var subDiv = document.createElement("div");
+		msgList.appendChild(subDiv);
+		*/
+// 		var sbDiv = $("<div>")
+// 		$("#msg_list").appendChild(subDiv);
+		
+		/*
+		$("#msg_list").appendChild($("<div>").html("<h1>테스트</h1>")
+											 .css("border", "1px solid tomato"));
+		*/
+		
+	/* 5. css 함수 추가하기 : style 속
+		// 첫번째
+		$("#msg").style["border"] = "1px solid tomato";
+		alert($("#msg").style["border"]);
+		// 두번째
+		$("h1").css("border", "1px solid tomato");
+		$("h1").css("color", "skyblue");
+		$("h1").css("background", "yellow");
+		// 세번째
+		$("h1").css({
+			"border": "1px solid tomato",
+			"color": "skyblue",
+			"background": "yellow"
+		});
+		
+		alert($("#msg").style("border"));
+		*/
+		
+		
+		/* 4. attr 함수 추가하기 : attribute
+		var msg = $("#msg");
+		msg.setAttribute("data-count", "100");
+		alert(msg.getAttribute("data-count"));
+		msg.attr("data-count", "100")
+		   .attr("data-remCnt", "100")
+		   .attr("data-likeCnt", "100");
+		msg.attr({"data-count": "100", "data-remCnt": "100"});
+		alert(msg.attr("data-count"));
+		*/
+	
+	
+	    // 3. val 함수 추가하기 : value 대체
+// 		var hobby1 = document.querySelector("#hobby1");
+// 		alert(hobby1.value);
+		/*
+		alert($("#hobby1").val());
+		$("#hobby1").val("변경된 값");
+		*/
+		
+		// 2. text 함수 추가하기 : innerText 대체
+// 		var msg = document.querySelector("#msg");
+// 		var msg = $("#msg");
+// 		msg.text("<h1>변경</h1>");
+// 		msg.innerText = "<h1>변경</h1>";
+		
+// 		msg.innerHTML = "<h2>변경</h2>";
+// 		alert(msg.innerHTML);
+// 		msg.html("<h1>변경</h1>")
+// 		alert(msg.html());
+		
+		
+		
+// 		alert(msg.html("<h2>변경</h2>").html());
+	
+	
+	
+		/* 1.html 함수 추가하기 : innerHTML 대체
+		alert($(".cMsg").html());
+		$(".cMsg").html("요소가 여러개인 경우");
+		*/
+		/*
+		// window.onload 대체하기	
+		$(function () {
+		});
+		*/
+		
+		/*
+// 		var msg = document.querySelector("#msg");
+		var msg = $("#msg");
+// 		alert(msg.innerHTML);
+		alert(msg.html());
+		// msg.innerHTML = "framework 라이브러리를 통한 변경"
+		msg.html("framework 라이브러리를 통한 변경");
+		*/
+	</script>
+</body>
+</html>
+
+
+
+
+
+

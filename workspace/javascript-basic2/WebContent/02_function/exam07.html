@@ -1,0 +1,64 @@
+<!-- 
+	콜백함수
+	- 함수는 데이터 타입의 일종이다(객체)
+	- 함수를 매개변수 또는 결과로 리턴하는것
+	- 일반적으로 코드에서 직접 호출하는 것이 아니라
+	  특정한 이벤트나 상황에서 자동 호출되는 함수를 말한다.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>/* 첫번째
+		function call(cb) {
+			cb();
+		}
+		function func() {
+			console.log("콜백함수 실행됨");
+		}
+		
+// 		console.log( func );
+// 		console.log( func() );
+		
+		call( func );
+		*/
+		
+		/* 두번쨰
+		function call2() {
+			function cb() {
+				console.log("콜백 호출됨");
+			}
+			return cb;
+		}
+		
+		var func = call2();
+		func();
+		*/
+		
+		/* 첫번째에서 변경된 방법
+		function call(cb) {
+			cb();
+		}
+		call( function () {
+			console.log("콜백함수 실행됨");
+		});
+		*/
+		
+		function call2() {
+			return function () {
+				console.log("콜백 호출됨")
+			};
+		}
+		/*
+		var func = call2();
+		func();
+		*/
+		
+		//call2를 실행후 call2를 실행한 결과값을 받아온다
+		call2()()
+	</script>
+</body>
+</html>

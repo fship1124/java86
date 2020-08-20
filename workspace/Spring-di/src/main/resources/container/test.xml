@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+                           
+    <!-- 
+    	ISand ham1 = new container.HamSand();
+    	ISand ham2 = new container.HamSand();
+    	ISand ham3 = ham2;
+    	
+    	bean 하나당 별도의 객체가 하나씩 만들어진다.
+     -->                       
+	
+	<bean id="ham1" class="container.HamSand" />
+	<bean name="ham2,ham3" class="container.HamSand" />
+</beans>	

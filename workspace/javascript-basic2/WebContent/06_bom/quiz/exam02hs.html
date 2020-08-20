@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function open1() {
+		window.open("exam02hs_child.html", "", "width=300, height=500");
+	}
+	
+	function fn_result(result) {
+		var obj = document.getElementById("result1")
+		obj.innerHTML = result;
+	}
+   
+</script>
+</head>
+<body>
+	<h1 id="result1"></h1>
+	<button onclick="open1()">계산</button>
+</body>
+</html>

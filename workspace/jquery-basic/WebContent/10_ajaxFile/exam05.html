@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.1.0.js"></script>
+
+</head>
+<body>
+	<form id="ajaxForm" action="/jquery-basic/ajaxFile/exam01"
+		  method="post"
+		  enctype="multipart/form-data">
+		  <!-- 1.일반데이타 전송 -->
+		  <input type="text" name="msg" /><br>
+		  <!-- 2.파일데이타 전송 -->
+		  <!-- multiple : 파일을 여러개 선택 가능 -->
+		  <input type="file" name="attachFile" multiple="multiple" />
+		  <button type="button">업로드</button>
+	</form>
+	
+	<script>
+		// 파일업로드단을 동적으로 변경
+		// 1.업로드 버튼클릭시 업로드 이벤트 실행
+// 		$("button").click(function () {
+		
+		// 2.1방식과 다르게 파일선택후 
+		$("[name=attachFile]").change(function () {
+			//파일데이타에 대한 배열객체
+			var files = $("[name=attachFile]")[0].files;
+			
+			var fd = new FormData();
+				fd.append("msg", $("[name]").val());
+			for(var i = 0; i< files.length; i++) {
+				fd.append("attachFile" + i, files[i]);
+			}	
+		
+		$.ajax({
+			url: "/jquery-basic/ajaxFile/exam02",
+			data: fd,	// 폼데이타를 설정할수 있음
+			type: "POST",
+			processData: false,	//파라미터 타입을 name=value 로 보내지 말라
+			contentType: false,	//contenttype을 인코드형태로 보내지 말라
+			success: function () {
+				alert("파일 업로드 성공");
+				$("input[type='file']").val("")
+			}
+		});		
+			
+		});
+	</script>
+</body>
+</html>

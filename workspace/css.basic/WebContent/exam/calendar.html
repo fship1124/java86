@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+    div { margin: 0 auto; }
+
+    th, td, table {
+        border: 2px solid gray;
+        border-collapse: collapse;
+    }
+    
+    th { text-align: center; 
+         background-color: gray; }
+    .week1{ background-color: orange; }
+    .week1{ background-color: skyblue; }
+    
+    td {
+      width: 100px;
+      height: 90px;  
+    }
+    
+    #year { background-image: url("/css.basic/images/2015.jpg"); }
+    #month { background-image: url("/css.basic/images/schedule.jpg"); }
+</style>
+</head>
+<body>
+    <div id="container" align="center">
+        <span id="year"></span>
+        <span id="month"></span>
+        <table id="content">
+            <tr>
+                <th class="week1">일요일</th>
+                <th >월요일</th>
+                <th >화요일</th>
+                <th >수요일</th>
+                <th >목요일</th>
+                <th >금요일</th>
+                <th class="week1">토요일</th>
+            </tr>
+            <tr>
+                <td class="day"></td>
+                <td class="day"></td>
+                <td class="day"></td>
+                <td class="day"></td>
+                <td class="day">1</td>
+                <td class="day">2</td>
+                <td class="day holiday">3</td>
+            </tr>
+            <tr>
+                <td class="day">4</td>
+                <td class="day holiday">5</td>
+                <td class="day">6</td>
+                <td class="day">7</td>
+                <td class="day">8</td>
+                <td class="day holiday">9</td>
+                <td class="day">10</td>
+            </tr>
+            <tr>
+                <td class="day">11</td>
+                <td class="day holiday">12</td>
+                <td class="day">13</td>
+                <td class="day">14</td>
+                <td class="day">15</td>
+                <td class="day">16</td>
+                <td class="day">17</td>
+            </tr>
+            <tr>
+                <td class="day">18</td>
+                <td class="day holiday">19</td>
+                <td class="day">20</td>
+                <td class="day">21</td>
+                <td class="day">22</td>
+                <td class="day">23</td>
+                <td class="day">24</td>
+            </tr>
+            <tr>
+                <td class="day">25</td>
+                <td class="day holiday">26</td>
+                <td class="day">27</td>
+                <td class="day">28</td>
+                <td class="day">29</td>
+                <td class="day">30</td>
+                <td class="day">31</td>
+            </tr>
+             
+        </table>
+    </div>
+</body>
+</html>

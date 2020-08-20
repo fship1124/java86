@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	canvas {
+		position: relative;
+		top: 50px;
+		left: 50px;
+	}
+</style>
+<script src="../../js/jquery-3.1.0.js"></script>
+</head>
+<body>
+	<canvas id="canvas" width="700" height="400"
+		style="border: 3px solid black"></canvas>
+		
+	<script>
+		// 그림을 그리기 위한 도화지 객체 얻기
+		var canvas = document.querySelector("#canvas");
+		// canvas에 직접 그림을 그릴 수 없다.
+		// context 객체를 얻고 그 위에 그림을 그린다.
+		var context = canvas.getContext("2d");
+		
+		// 마우스가 눌린 상태인지 파악
+		var isPress = false;
+		
+		$(canvas).on({
+			"mousedown": function (event) {
+				isPress = true;
+				// 선 그리기 시작 설정
+				context.beginPath();
+				// 그릴 시작점 좌표를 설정 , 이벤트 객체 안에서 사용은 offset 으로 한다.
+				context.moveTo(event.offsetX, event.offsetY);
+			},
+			"mouseup": function (event) {
+				isPress = false;
+			},
+			"mousemove": function (event) {
+				if (isPress) {
+				// 다음 점의 위치
+				context.lineTo(event.offsetX, event.offsetY);
+				// 점과 선들을 이어서 화면에 보여주세요. 화면에 선을 그어라
+				context.stroke();
+				}
+			}
+		});
+	
+	</script>
+		
+</body>
+</html>

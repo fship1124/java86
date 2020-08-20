@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven>
+        <!-- @ResponseBody:로 String 처리할때 한글처리 -->
+        <!-- 응답결과:메시지를 사용하는 클래스에 변환 및 적용 -->
+	    <mvc:message-converters>
+	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+	            <property name="supportedMediaTypes">
+	                <list>
+	                    <value>text/html; charset=UTF-8</value>
+	                </list>
+	            </property>
+	        </bean>
+	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	            <property name="supportedMediaTypes">
+	                <list>
+	                    <value>text/html; charset=UTF-8</value>
+	       	 			<!-- 리스판스바디가 list일때 json으로 바꿔준다 : json 라이브러리가 자동으로 변환해준다. -->
+	                    <value>application/json; charset=UTF-8</value>
+	                </list>
+	            </property>
+	        </bean>
+	    </mvc:message-converters>
+    </mvc:annotation-driven>
+    
+    <!-- 인터셉터 추가 : 권한접근 제한 기능 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/main.do" />  <!-- 인터셉터 설정 제외 페이지 -->
+            <mvc:exclude-mapping path="/login/**" />
+            <mvc:exclude-mapping path="/board/list.do" />
+            <bean class="kr.co.mlec.interceptor.AuthInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
+	<!-- 최대 업로드 파일 사이즈 : 10MB  / 스프링에서 MultipartHttpServletRequest 사용하기위해 필요함.-->
+    <bean id="multipartResolver"  
+   	      class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
+    
+    <!-- path 경로로 들어오면 view-name 페이지로 이동 -->
+    <mvc:view-controller path="/login/loginForm.do" view-name="login/loginForm"/>
+    <mvc:view-controller path="/board/writeForm.do" view-name="board/writeForm"/>
+ <!-- <mvc:view-controller path="/main.do" view-name="main"/>-->
+    
+	<mvc:default-servlet-handler />
+	
+    <!-- prefix :시작 suffix :끝-->
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
+	</mvc:view-resolvers>
+</beans>
+
+
+
+
+
+
+
+
+

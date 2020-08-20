@@ -1,0 +1,68 @@
+<!-- 
+	표준 이벤트 모델
+	객체.addEventListener(이벤트타입, 콜백함수(이벤트 리스너), 전파여부);
+	
+	1.
+	<button onclick="chkFn()">클릭</button>
+	
+	2.
+	var btn = document.querySelector("button");
+	btn.onclic = function() {};
+	<button>클릭</button>
+	
+	3.
+	var btn = document.querySelector("button");
+	btn.addEventListener("click", function() {}, true);
+	<button>클릭</button>
+	
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	button {
+		width: 200px;
+		height: 100px;
+		color: white;
+		background: tomato;
+		border: 2px solid black;
+		font-size: 25px;
+	}
+</style>
+</head>
+<body>
+	<button>1번 버튼</button>
+	<button>2번 버튼</button>
+	
+	<script>
+		var btnArr = document.querySelectorAll("button");
+		
+		for (var i = 0; i < btnArr.length; i++) {
+			btnArr[i].addEventListener("click", function(e) {
+				console.dir(e);
+				
+				// 클릭이벤트가 발생된 대상 객체(버튼)
+				var obj = e.target;
+				console.log(obj.innerHTML);
+				
+				// 이벤트가 발생한 대상(obj에 대해) 객체 자체의 좌표
+				// offset 이 들어가면 엘리먼트 개념이 된다.
+				console.log(obj.offsetLeft, obj.offsetTop);
+				
+				// 클릭한 이벤트가 발생한 좌표와 대상 객체와의 좌표 차이(좌표점이 매번 바뀔수 있음)
+				console.log(e.offsetX, e.offsetY);
+				
+				// 클릭한 이벤트의 웹브라우져와의 거리
+				console.log(e.clientX, e.clientY);
+				
+				// 클릭한 이벤트의 스크린과의 거리
+				console.log(e.screenX, e.screenY);
+				
+			});
+		}
+	</script>
+
+</body>
+</html>

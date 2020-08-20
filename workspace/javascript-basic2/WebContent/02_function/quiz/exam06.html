@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+    #btnDiv { 
+    margin: 0 auto; 
+    width: 500px;
+}
+	button {	
+	    background-color: red;
+	    font-size: 30px;
+	    color: white;
+		width: 200px; 
+		height: 80px; 
+		float: left;
+		margin: 20px;
+		box-shadow: 0px 5px 5px 0px black;
+		border-top-left-radius: 20px;		
+		border-top-right-radius: 20px;		
+		border-bottom-left-radius: 20px;		
+		border-bottom-right-radius: 20px;		
+}
+
+	#time { 
+	width: 500px; 
+	height: 150px; 
+	background-color: black; 
+	color: white; 
+	text-align: center;
+	margin-top: 10px;
+}
+
+
+</style>
+</head>
+<body>
+	<div class="btnDiv">
+	    <button onclick="showTime()" id = "start">시작</button>
+	    <button onclick="showtimeclose()" id = "stop">정지</button>
+	</div>
+	<div id="time">시작 버튼을 누르세요</div>
+
+<script>
+    var timer;
+	function showtime () {
+		var date = new Date();
+		var time = document.getElementById("time");
+			time.innerHTML = currentDate.toLocaleTimeString(); 
+		timer = setTimeout(showTime, 1000);	
+	}
+	
+	function showtimeclose () {
+		clearTimeout(timer);
+	}
+	
+</script>	
+</body>
+</html>

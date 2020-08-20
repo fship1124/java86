@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	p {
+		font-size: 20px;
+		font-weight: bold;
+		height: 40px;
+		background: tomato;
+		color: white;
+		text-align: center;
+		line-height: 40px;
+	}
+	div {
+	    position: absolute;
+		height: 100px;
+		width: 100psx;
+		background-color: yellow;
+		font-size: 20px;
+	}
+</style>
+</head>
+<body>
+	<p>마우스 이벤트 연습</p>
+	<div></div>
+	
+	<script>
+	window.onload = function () {
+		var dObj = document.querySelector("div");
+		document.addEventListener("mousemove", function(e){
+			dObj.style.left = e.clientX + "px";
+			dObj.style.top = e.clientY + "px";
+		}
+		);
+	};
+		
+		
+
+// 		var x = 0;
+// 		var y = o;
+// 		move = 0;
+		
+// 		function mouseMove() {
+// 			var obj = e.target;		
+// 			var left = obj.offsetLeft;
+// 			var top = obj.offsetTop;
+// 			if(move) {
+// 				dragObj
+// 			}
+// 		}
+		
+
+
+	</script>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

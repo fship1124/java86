@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+/* 1번 : undefined
+func();
+function func() {
+    console.log(a);
+    var a = 2;
+}
+*/
+
+/* 2번 : Error
+foo();  
+
+var foo = function () {
+	console.log("foo!!");
+};
+*/
+/* 3번 : 1
+foo(); 
+var foo;
+function foo() {
+	console.log(1);
+}
+foo = function() {
+	console.log(2);
+};
+*/
+/* 4번 : 3
+foo(); 
+function foo() {
+	console.log(1);
+}
+var foo = function() {
+	console.log(2);
+};
+function foo() {
+	console.log(3);
+}
+--컴파일시점
+function foo() {
+	console.log(1);
+}
+var foo;
+function foo() {
+	console.log(3);
+}
+--실행시점
+foo();
+foo = function() {
+	console.log(2);
+};
+*/
+/* 5번 : b 출력
+foo(); 
+var a = true;
+if (a) {
+	function foo() {
+		console.log("a");
+	}
+} else {
+	function foo() {
+		console.log("b");
+	}
+}
+--컴파일시점
+var a;
+function foo() {
+	console.log("a");
+}
+function foo() {
+	console.log("b");
+}
+--실행시점
+foo();
+ */
+</script>
+</body>
+</html>
+
+
+
+
+

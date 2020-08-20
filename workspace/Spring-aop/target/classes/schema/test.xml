@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:p="http://www.springframework.org/schema/p" 
+	   xmlns:aop="http://www.springframework.org/schema/aop" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+                           
+    <!-- AOP 설정 태그 중 루트, AOP 관련 설정 정보임을 나타냄 -->                      
+<!--	<aop:config> -->	
+		<!-- 포인트컷 -->	
+<!--		<aop:pointcut id="" expression="핵심기능클래스의 메서드(ex.프린트)" />-->
+		<!-- 포인트컷 + 어드바이스 정보(설정을 위해 사용) -->
+<!--		<aop:aspect ref="공통기능 클래스" >-->
+			<!-- "핵심기능클래스의 메서드" 실행 전에 "공통기능 클래스"를 호출한다 -->
+<!--			<aop:before method="공통기능 클래스의 메서드(ex.초재는)" -->
+			           <!-- pointcut-ref="포인트참조"/>-->
+<!-- 		</aop:aspect> -->
+<!-- 	</aop:config> -->
+	
+	
+	
+	<!-- 공통기능 클래스 -->
+	<bean id="log" class="schema.LogAspect" />
+	<bean id="time" class="schema.TimeAspect" />
+	
+	<!-- 핵심 기능 클래스 -->
+	<bean id="member" class="schema.MemberController" />
+	<bean id="board" class="schema.BoardController" />
+	
+	<aop:config>
+		<aop:pointcut id="pCut" expression="execution(* execute(..))" />
+		<!-- 포인트컷 + 어드바이스 정보(설정을 위해 사용) -->
+		<aop:aspect ref="log" >
+			<aop:before method="showLog" 
+			            pointcut-ref="pCut"/>
+		</aop:aspect>
+		<!-- 또다른 공통기능 추가 -->
+		<aop:aspect ref="time" >
+			<!-- 자기자신을 실행시키고 핵심기능을 호출하고 자기자신을 정지한다 -->
+			<aop:around method="executeTime" 
+			            pointcut-ref="pCut"/>
+		</aop:aspect>
+	</aop:config>
+	
+</beans>	

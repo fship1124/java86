@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../../js/jquery-3.1.0.js"></script>
+</head>
+<body>
+	<div>
+		<p>당신의 취미는?</p>
+		<input type="checkbox" name="all">전체</input><br/>
+		<input type="checkbox" name="hobby">영화감상</input>
+		<input type="checkbox" name="hobby">음악듣기</input>
+		<input type="checkbox" name="hobby">게임하기</input>
+		<input type="checkbox" name="hobby">독서</input>
+	</div>
+	<button>전체선택</button>
+	<button>전체해제</button>
+	<button>선택정보확인</button>
+	
+	<script>
+		$("button:eq(0)").click(function () {
+			$("input[name=hobby]").prop("checked", true);
+		}); 
+		$("button:eq(1)").click(function () {
+			$("input[name=hobby]").prop("checked", false);
+		}); 
+		$("button:eq(2)").click(function () {
+			alert($("input[name=hobby]:checked").length + "개의 체크박스가 선택되었습니다.");
+		}); 
+		$("input[name=all]").change(function () {
+			$("input[name=hobby]").prop(
+					"checked", $(this).prop("checked"));
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:p="http://www.springframework.org/schema/p" 
+	   xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+       <context:annotation-config />  <!-- 아래에 있는 bean들을 생성할때 @Autowired 선언되어있는지 찾겠다
+                                           -클래스타입을 보고 해당하는 bean의 타입과 일치하는 객체를 자동주입을 시킨다   -->
+       <bean id="ham" class="resource.HamSand" />  
+       <bean id="egg" class="autowired.EggSand" >
+       		<qualifier value="egg" />
+       </bean>                    
+       <bean id="menu" class="resource.Menu" />                    
+		
+</beans>	
