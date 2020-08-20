@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.1.0.js"></script>
+</head>
+<body>
+	<button>호출</button>
+	<div id="result"></div>
+	
+	<script>
+		$("button").click(function () {
+			// /jquery-basic/ajax/exam01
+			/*
+			// success, error 는 1.8버젼 부터 deprecated
+			$.ajax({
+				url: "/jquery-basic/ajax/exam01",
+				type: "GET",
+				success: function (msg) {
+					$("#result").html(msg);
+				},
+				error: function () {}
+			});
+			*/
+			$.ajax({
+				url: "/jquery-basic/ajax/exam01",
+				type: "GET"
+			})
+			.done(function (msg) {
+				$("#result").html(msg);
+			})
+			.fail(function (jqXHR, textStatus, errorText) {
+				alert("에러 발생 : " + errorText);
+			});
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	var num1 = 172.345768;
+	var num2 = new Number(172.345768);
+	
+	console.log(typeof (num1));
+	console.log(typeof (num2));
+	// 자바스크립트는 객체타입이 아닌 기본 타입에 
+	// "."연산자를 사용하게 되면 일시적으로 기본타입에 해당하는
+	// 객체타입으로 변경한 후 사용된다.
+	// 사용이 끝난후 다시 기본타입으로 변경됨
+	console.log(num1.toFixed(0));
+	console.log(num1.toFixed(1));
+	console.log(num1.toFixed(2));
+	console.log(num1.toFixed(3));
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

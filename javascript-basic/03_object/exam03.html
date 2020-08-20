@@ -1,0 +1,34 @@
+<!-- 
+	javascript 에서 문자열이 json 형태일때
+	객체로 변환할때 사용하는 함수 2가지
+	1. eval
+	2. JSON.parse : es5부터 지원
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	var str = '{"id": "hong", "name": "홍길동"}';
+	// str문자열의 내용을 json 객체로 변환한 후 반환
+	var mem = JSON.parse(str);
+	console.log("id", mem.id);
+	console.log("name", mem.name);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

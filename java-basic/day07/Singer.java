@@ -1,0 +1,48 @@
+package day07;
+
+public class Singer {
+	// private : 외부에서는 나를 직접 접근 불가능해
+	//           나는 선언된 Singer 안에서만 직접 접근할 수 있어
+	private String name;
+	private int age;
+	
+	// 멤버변수의 값을 반환하기 위한 기능 메서드 작성
+	// 게터(getter)
+	// 메서드 작성 방식
+	// 접근제한자   반환타입       메서드명     매개변수
+	// public      멤버변수타입   get변수명    없음
+	public String getName() {
+		return name;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	// 멤버변수의 값을 설정하는 기능의 메서드 작성
+	// 세터(setter)
+	// 메서드 작성 방식
+	// 접근제한자   반환타입   메서드명   매개변수
+	// public      void      set변수명  변수에 들어갈 값의 타입
+	public void setName(String n) {
+		name = n;
+	}
+	
+	public void setAge(int a) {
+		if (a < 0) {
+			System.out.println("입력된 나이가 올바르지 않습니다.");
+			System.exit(0);
+		}
+		age = a;
+	}
+}
+
+
+
+
+
+
+
+
+
+

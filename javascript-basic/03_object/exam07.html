@@ -1,0 +1,48 @@
+<!-- 
+	객체 프로퍼티 삭제하기
+	delete 객체.프로퍼티명
+	
+	객체 자체는 삭제할 수 없음
+	delete 객체(X)
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	var member = {
+		id: "abc",
+		name: "홍길동",
+		email: "hong@a.com",
+		info: function () {
+			console.log(this.id, this.name, this.email);
+		}
+	};
+	
+	member.info();
+	console.log("member.email 삭제 후 ----------------");
+	delete member.email;
+	member.info();
+	
+	console.log("member 삭제 후 ----------------");
+	delete member;
+	member.info();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

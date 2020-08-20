@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.1.0.js"></script>
+<script src="../js/jquery.form.js"></script>
+</head>
+<body>
+	<form id="ajaxForm" action="/jquery-basic/ajaxfile/exam01"
+	      method="post"
+	      enctype="multipart/form-data">
+		<input type="text" name="msg" /><br>
+		<input type="file" name="attachFile" />
+		<button>업로드</button>	      
+	</form>
+	<script>
+		$("#ajaxForm").ajaxForm({
+			beforeSubmit: function () {
+				alert("데이터 전송전 호출");
+			},
+			success: function (reponseText) {
+				alert("파일 업로드 성공");
+			},
+			error: function () {
+				alert("파일 업로드시 에러 발생!!");
+			}
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

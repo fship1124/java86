@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+h3, div {
+	margin: 0px;
+	width: 500px;
+	border: 1px solid #445566;
+	padding: 5px;
+	box-sizing: border-box;
+}
+h3 {
+	background: #8899aa;
+}
+div {
+	position:absolute;
+	height: 160px;
+	clip: rect(0px, 500px, 160px, 0px); 
+}
+</style>
+<script>
+var bottom = 160;
+function doAction() {
+	var obj = document.querySelector("div");
+	if (bottom == 0) {
+		id = setInterval(function () {
+			bottom += 16;
+		    obj.style.clip = "rect(0px, 500px, " + bottom + "px, 0px)";
+		    if   (bottom == 160) clearInterval(id);
+		}, 100);
+	} else {
+		id = setInterval(function () {
+			bottom -= 16;
+		    obj.style.clip = "rect(0px, 500px, " + bottom + "px, 0px)";
+		    if   (bottom == 0) clearInterval(id);
+		}, 100);
+	}
+}
+</script>
+</head>
+<body>
+	<h2>어코디언 기능 구현</h2>
+	<h3 onclick="doAction();">오늘은 자바스크립트 CSS</h3>
+	<div>
+		오늘은 자바스크립트 CSS 적용하는 날<br />
+		오늘은 자바스크립트 CSS 적용하는 날<br />
+		오늘은 자바스크립트 CSS 적용하는 날
+	</div>
+</body>
+</html>
+
+
+

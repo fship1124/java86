@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>ServletJsp</display-name>
+
+  <!-- 필터 클래스 등록 -->
+  <filter>
+      <filter-name>myFilter</filter-name>
+      <filter-class>filter.MyFilter</filter-class>
+  </filter>
+  
+  <!-- 필터와 URL 매핑 -->
+  <filter-mapping>
+      <filter-name>myFilter</filter-name>
+      <url-pattern>*</url-pattern>
+  </filter-mapping>
+  
+  
+  
+  <!-- 
+  	사용자가 정의한 서블릿 클래스를 인식시키는 태그
+  	servlet-name  : 서블릿의 논리적 이름(별칭)
+  	servlet-class : 사용자가 정의한 서블릿 클래스 경로 명시
+  	                 패키이름 포함한 경로
+   -->
+  <servlet>
+      <servlet-name>exam01</servlet-name>
+      <servlet-class>servlet.Exam01</servlet-class>
+  </servlet>
+  <!-- 
+  	http://localhost:8000/ServletJsp/exam01
+  	servlet-name : 기등록된 servlet 태그 중에서 동일한 이름을 찾는다.
+  	url-pattern  : 서블릿을 호출할 url 정보 등록
+   -->
+  <servlet-mapping>
+      <servlet-name>exam01</servlet-name>
+      <url-pattern>/exam01</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>exam02</servlet-name>
+      <servlet-class>servlet.Exam02</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>exam02</servlet-name>
+      <url-pattern>/exam02</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
