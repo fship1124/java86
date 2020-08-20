@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:p="http://www.springframework.org/schema/p" 
+	   xmlns:context="http://www.springframework.org/schema/context" 
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop
+                  		   http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<!-- beans 추가 -->
+	<context:component-scan base-package="schema" />
+	
+	<!-- AOP스키마 전체 구성 요소 -->
+	<!-- excute()를 호출시(before) log클래스의 showLog메서드를 호출 -->
+	<aop:config>
+		<!-- 포인트컷 :  -->
+		<aop:pointcut id="pCut" expression="execution(* execute(..))" />
+		
+		<!-- 포인트컷 + 어드바이스 -->
+		<aop:aspect ref="logAspect">
+			<!-- 어드바이스 : 실행시점 -->
+			<aop:before method="showLog" pointcut-ref="pCut"/>
+		</aop:aspect>
+		
+		<!-- 포인트컷 + 어드바이스 -->
+		<aop:aspect ref="timeAspect">
+			<!-- 어드바이스 : 실행시점 -->
+			<aop:around method="executeTime" pointcut-ref="pCut"/>
+		</aop:aspect>
+		
+	</aop:config>
+
+	
+</beans>

@@ -1,0 +1,107 @@
+@CHARSET "UTF-8";
+
+#content > #companyTable {
+	margin: 10px auto;
+	border-collapse: collapse;
+}
+
+#content > #companyTable tr { 
+	margin: 5px;
+}
+
+#content > #companyTable tr:hover td, tr:hover th{ 
+	background-color: #dadada;
+}
+
+#content > #companyTable tr:nth-child(2n) { 
+	background-color: #f3f3f3;
+}
+
+#content > #companyTable tr:nth-child(2n+1) { 
+	background-color: #ffffff;
+}
+
+
+#content > #companyTable th { 
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#content > #companyTable td {
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: left;
+	font-size: 14px;
+	width: 500px;
+}
+
+
+
+#reply {
+	
+}
+
+#reply *{
+	margin: 0 auto;
+}
+
+#replyList{
+	
+}
+
+#replyList table * {
+	
+}
+#replyList table {
+	margin: 0 auto;
+}
+
+#replyList td {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#replyList th {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+button {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border:2px solid #c0c0c0;   
+	background-Color:#ffffff;  
+	font-size:7px;
+	font-weight:bold;   
+	color:#000000;  
+	width:50px;height:25px; 
+}
+
+button:hover {
+	color:#ffffff;
+	background-Color:#000000;    
+}
+
+.rWriter {
+	width: 100px;
+}
+
+.rContent {
+	width: 300px;
+}
+
+.rRegDate {
+	width: 150px;
+}
+
+.rX {
+	width: 200px;
+}

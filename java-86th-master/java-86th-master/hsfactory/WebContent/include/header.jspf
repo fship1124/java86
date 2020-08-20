@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div id ="header">
+	<div id="greeting" onclick="location.href='${pageContext.request.contextPath}/index.jsp'">HS34-FACTORY  MES</div>
+	<div id="login">
+	<c:choose>
+		<c:when test="${empty account}">
+		<div><button onclick="location.href='${pageContext.request.contextPath}/accountLoginForm.do'">LOGIN</button></div>
+		</c:when>
+		<c:otherwise>
+		<div><button onclick="location.href='${pageContext.request.contextPath}/accountLogout.do'">LOGOUT</button></div>
+		<div><c:out value="사용자ID : ${account.id} 권한 : ${authType} " /></div>
+		</c:otherwise>
+	</c:choose>
+	</div>	
+</div>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+

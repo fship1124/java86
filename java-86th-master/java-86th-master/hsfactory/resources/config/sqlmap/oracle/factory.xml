@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.FactoryDAO">
+	<resultMap id="factoryMap" type="factory">
+		<result column="factory_id" property="factoryId"></result>
+		<result column="factory_name" property="factoryName"></result>
+		<result column="factory_adress" property="factoryAdress"></result>
+		<result column="factory_reg_date" property="factoryRegDate"></result>
+	</resultMap>
+	
+	<select id="selectListFactory" resultMap="factoryMap">
+		select *
+		from factory
+		order by factory_id
+	</select>
+	
+	<insert id="insertFactory" parameterType="factory">
+		insert into factory(factory_id, factory_name, factory_adress, factory_reg_date)
+		values (s_factory_no.nextval, #{factoryName}, #{factoryAdress}, #{factoryRegDate})
+	</insert>
+	
+	<update id="updateFactory" parameterType="factory">
+		update factory
+		set factory_name = #{factoryName},
+		factory_adress = #{factoryAdress}
+		where factory_id = #{factoryId}
+	</update>
+	
+	<delete id="deleteFactory" parameterType="int">
+		delete
+		from factory
+		where factory_id = #{factoryId}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.RawMaterialOrderDAO">
+
+<resultMap type="rawMaterialOrder" id="rawMaterialOrderMap">
+	<result column="RAW_MATERIAL_ORDER_ID" property="rawMaterialOrderId"/>
+	<result column="raw_material_order_name" property="rawMaterialOrderName"/>
+	<result column="RAW_MATERIAL_QUANTITY" property="rawMaterialQuantity"/>
+	<result column="material_id" property="materialId"/>
+	<result column="WORKER" property="worker"/>
+	<result column="ADMINISTRATOR" property="administrator"/>
+	<result column="RAW_MATERIAL_ORDER_REG_DATE" property="rawMaterialOrderRegDate"/>
+	<result column="RAW_MATERIAL_WAREHOUSING_DATE" property="rawMaterialWarehousingDate"/>
+	<result column="COMPANY_NAME" property="companyName"/>
+	<result column="MATERIAL_NAME" property="materialName"/>
+	<result column="CODE_NAME" property="codeName"/>
+	<result column="STATUS_TYPE" property="status"/>
+</resultMap>
+
+
+<select id="selectRawMaterialOrder" parameterType="string" resultMap="rawMaterialOrderMap">
+	select R.RAW_MATERIAL_ORDER_ID, r.raw_material_order_name, R.RAW_MATERIAL_QUANTITY, r.material_id,
+			R.WORKER, R.ADMINISTRATOR, 
+			R.RAW_MATERIAL_ORDER_REG_DATE, R.RAW_MATERIAL_WAREHOUSING_DATE,
+			C.COMPANY_NAME, M.MATERIAL_NAME, CM.CODE_NAME, R.STATUS_TYPE
+	from RAW_MATERIAL_ORDER r, COMPANY c, MATERIAL m, CODE_MANAGEMENT cm
+	where r.company_id = c.company_id
+	and r.material_id = m.material_id
+	and CM.TYPE_NAME = #{type}
+	and CM.TYPE_ID = R.STATUS_TYPE      
+</select>
+
+<insert id="insertRawMaterialOrder" parameterType="rawMaterialOrder">
+	insert into 
+		RAW_MATERIAL_ORDER (
+			raw_material_order_id, raw_material_order_name, material_id, raw_material_quantity, company_id, status_type, worker
+			) values (
+			S_RAW_MATERIAL_ORDER_NO.NEXTVAL, #{rawMaterialOrderName}, #{materialId}, #{rawMaterialQuantity}, #{companyId}, #{status}, #{worker})
+</insert>
+
+<update id="updateByNoRawMaterialOrder" parameterType="rawMaterialOrder">
+	update RAW_MATERIAL_ORDER
+	set raw_material_order_name = #{rawMaterialOrderName}
+	where raw_material_order_id = #{rawMaterialOrderId}
+</update>
+
+
+<update id="updateStatusByNoRawMaterialOrder" parameterType="rawMaterialOrder">
+	update RAW_MATERIAL_ORDER
+	set status_type = #{status},
+	administrator = #{administrator}
+	where raw_material_order_id = #{rawMaterialOrderId}
+</update>
+
+<update id="updateStatusWareDateByNoRawMaterialOrder" parameterType="rawMaterialOrder">
+	update RAW_MATERIAL_ORDER
+	set status_type = #{status},
+	RAW_MATERIAL_WAREHOUSING_DATE = to_date(sysdate, 'yyyy/MM/dd')
+	where raw_material_order_id = #{rawMaterialOrderId}
+</update>
+
+
+<update id="updateRawMaterialQuantityByNoINVENTORY" parameterType="rawMaterialOrder">
+	UPDATE INVENTORY
+	   SET MATERIAL_QUANTITY = MATERIAL_QUANTITY + #{rawMaterialQuantity}
+	 WHERE MATERIAL_ID = ${materialId}
+</update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

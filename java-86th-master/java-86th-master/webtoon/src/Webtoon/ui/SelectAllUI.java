@@ -1,0 +1,25 @@
+package Webtoon.ui;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import Webtoon.WebtoonVO;
+
+
+public class SelectAllUI extends BaseUI {
+	public void execute() {
+		ArrayList<WebtoonVO> list = wdao.selectWebtoon();
+		System.out.printf("전체 갯수는 %d 입니다.\n", list.size());
+		System.out.println("제목\t장르\t연재날짜\t작가 이름\t조회수\t총 추천\t작가의 말\t연령 제한");
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat sdf=new SimpleDateFormat(pattern);
+		
+		for (int i = 0; i < list.size(); i++) {
+			WebtoonVO w =  list.get(i);
+			System.out.printf("%s\t%s\t%s\t%s\t%d\t%d\t%s\t%d\n", 
+					w.getWebtoonTitle(), w.getGenreType(),w.getWeekDay(),w.getWriterNickname(),
+					w.getViewCount(),w.getRecomCount(),w.getWebtoonSubContent(),w.getAgeLimit());
+
+		}
+	}
+}

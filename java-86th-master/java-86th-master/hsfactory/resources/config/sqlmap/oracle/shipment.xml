@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.ShipmentDAO">
+
+<!-- list -->
+<resultMap id="shipmentMap" type="shipment">
+	<result column="shipment_id" property="shipmentId" />
+	<result column="material_id" property="materialId" />
+	<result column="cp_warehouse_id" property="cpWarehouseId" />
+	<result column="logistic_warehouse_id" property="logisticWarehouseId" />
+	<result column="company_id" property="companyId" />
+	<result column="material_quantity" property="materialQuantity" />
+	<result column="shipment_reg_date" property="shipmentRegDate" />
+	<result column="material_name" property="materialName" />
+	<result column="material_cost" property="materialCost" />
+	<result column="material_unit" property="materialUnit" />
+	<result column="company_name" property="companyName" />
+</resultMap>
+
+<select id="selectListShipment" resultMap="shipmentMap">
+SELECT s.shipment_id, 
+       s.material_id, 
+       s.cp_warehouse_id, 
+       s.logistic_warehouse_id, 
+       s.company_id, 
+       s.material_quantity, 
+       s.shipment_reg_date, 
+       m.material_name, 
+       m.material_cost,
+       m.material_unit,
+       cw.warehouse_name as cpWarehouseName,
+       lw.warehouse_name as logisticWarehouseName, 
+       c.company_name
+FROM   shipment s, 
+       material m, 
+       warehouse cw, 
+       warehouse lw, 
+       company c 
+WHERE  S.material_id = m.material_id 
+       AND s.cp_warehouse_id = cw.warehouse_id 
+       AND s.logistic_warehouse_id = LW.warehouse_id 
+       AND s.company_id = c.company_id 
+ORDER BY s.shipment_id desc
+</select>
+
+<select id="selectOneShipment" resultMap="shipmentMap" parameterType="int">
+SELECT s.shipment_id, 
+       s.material_id, 
+       s.cp_warehouse_id, 
+       s.logistic_warehouse_id, 
+       s.company_id, 
+       s.material_quantity, 
+       s.shipment_reg_date, 
+       m.material_name,
+       m.material_cost,
+       m.material_unit,
+       cw.warehouse_name as cpWarehouseName,
+       lw.warehouse_name as logisticWarehouseName, 
+       c.company_name 
+FROM   shipment s, 
+       material m, 
+       warehouse cw, 
+       warehouse lw, 
+       company c 
+WHERE  S.material_id = m.material_id 
+       AND s.cp_warehouse_id = cw.warehouse_id 
+       AND s.logistic_warehouse_id = lw.warehouse_id 
+       AND s.company_id = c.company_id
+       AND s.shipment_id = #{shipmentId}
+</select>
+
+<!-- insert -->
+<insert id="insertShipment" parameterType="shipment">
+INSERT INTO shipment 
+            (shipment_id, 
+             material_id, 
+             cp_warehouse_id, 
+             logistic_warehouse_id, 
+             company_id, 
+             material_quantity, 
+             shipment_reg_date) 
+VALUES     (s_shipment_no.nextval, 
+            #{materialId}, 
+            #{cpWarehouseId}, 
+            #{logisticWarehouseId}, 
+            #{companyId}, 
+            #{materialQuantity}, 
+            #{shipmentRegDate})
+</insert>
+
+<update id="updateIventory" parameterType="shipment">
+UPDATE inventory 
+SET    material_quantity = material_quantity - #{materialQuantity} 
+WHERE  warehouse_id = #{cpWarehouseId} 
+       AND material_id = #{materialId} 
+</update>
+
+<select id="selectListCompany" resultType="company">
+	select company_id as companyId, company_name as companyName
+	from company
+</select>
+
+<select id="selectListWarehouse" resultType="warehouse" parameterType="int">
+	select warehouse_id as warehouseId, warehouse_name as warehouseName
+	from warehouse 
+	where warehouse_type=#{warehouseType}
+</select>
+
+<select id="selectListMaterial" resultType="material" parameterType="int">
+	select material_id as materialId, material_name as materialName, material_cost as materialCost, material_unit as materialUnit
+	from material
+	where material_type=#{materialType}
+</select>
+
+
+<!-- delete -->
+<delete id="deleteShipment" parameterType="shipment"> 
+	delete from shipment
+	where shipment_id = #{shipmentId}
+</delete>
+
+<update id="updateDeleteIventory" parameterType="shipment">
+UPDATE inventory 
+SET    material_quantity = material_quantity + #{materialQuantity} 
+WHERE  warehouse_id = #{cpWarehouseId} 
+       AND material_id = #{materialId} 
+</update>
+
+<!-- update -->
+<update id="updateShipment" parameterType="shipment">
+	update shipment
+	set material_id = #{materialId},
+	cp_warehouse_id = #{cpWarehouseId},
+	logistic_warehouse_id = #{logisticWarehouseId},
+	company_id =  #{companyId},
+	material_quantity = #{materialQuantity},
+	shipment_reg_date = #{shipmentRegDate}
+	where shipment_id = #{shipmentId}
+</update>
+
+<update id="updateUpdateInventory" parameterType="shipment">
+UPDATE inventory 
+SET    material_quantity = material_quantity + #{materialQuantity} 
+WHERE  warehouse_id = #{cpWarehouseId} 
+       AND material_id = #{materialId}
+</update>            
+          
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

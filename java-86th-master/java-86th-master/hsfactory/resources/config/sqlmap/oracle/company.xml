@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.CompanyDAO">
+
+<resultMap type="company" id="resultmap">
+	<result column="company_id" property="comId"/>
+	<result column="company_name" property="comName"/>
+	<result column="company_adress" property="comAdress"/>
+	<result column="company_reg_no" property="comRegNo"/>
+	<result column="company_type" property="comType"/>
+	<result column="payment_method" property="comMethod"/>
+	<result column="company_reg_date" property="comDate"/>
+	<result column="code_name" property="paymentName"/>
+	<result column="comTypeName" property="comTypeName"/>
+</resultMap>
+
+<select id="selectList" resultMap="resultmap" parameterType="company">
+     select p.company_id, p.company_name, p.company_adress, p.company_reg_no, 
+            p.company_type, p.payment_method, p.company_reg_date, p.code_name, 
+            o.code_name comTypeName
+       from (select *
+      	       from COMPANY cp, CODE_MANAGEMENT cdmg
+              where (cdmg.type_name = 'payment'
+                and cdmg.type_id = cp.company_type)) p,
+            (select *
+               from COMPANY cp, CODE_MANAGEMENT cdmg
+              where (cdmg.type_name = 'ordertype'
+                and cdmg.type_id = cp.company_type)) o
+     	<choose>
+     		<when test="orderColId == 'comId' and order == 1"  >
+     		  where  p.company_id = o.company_id
+     			order by company_id asc
+     		</when>
+     		<when test="orderColId == 'comName' and order == 1">
+     		  where  p.company_id = o.company_id
+     			order by p.company_name asc
+     		</when>
+     		<otherwise>
+     		  where  p.company_id = o.company_id
+     			order by p.company_id desc
+     		</otherwise>
+     	</choose>
+</select>
+
+<resultMap type="company" id="resultMap1">
+	<result column="company_name" property="comName"/>
+	<result column="company_adress" property="comAdress"/>
+	<result column="company_reg_no" property="comRegNo"/>
+	<result column="company_type" property="comType"/>
+	<result column="payment_method" property="comMethod"/>
+</resultMap>
+
+<select id="selectCompanyById" parameterType="int" resultMap="resultmap">
+     select p.company_id, p.company_name, p.company_adress, p.company_reg_no, 
+            p.company_type, p.payment_method, p.company_reg_date, p.code_name, 
+            o.code_name comTypeName
+       from (select *
+                 from COMPANY cp, CODE_MANAGEMENT cdmg
+              where (cdmg.type_name = 'payment'
+                and cdmg.type_id = cp.company_type)) p,
+            (select *
+               from COMPANY cp, CODE_MANAGEMENT cdmg
+              where (cdmg.type_name = 'ordertype'
+                and cdmg.type_id = cp.company_type)) o
+     where (p.company_id = o.company_id
+       and  p.company_id = #{comId})
+     order by company_id desc
+</select>
+
+
+<select id="selectCompanyType" resultType="company">
+	select code_name comTypeName, type_id comType
+	  from CODE_MANAGEMENT
+	 where type_name = 'ordertype'   
+</select>
+
+<select id="selectCompanyMethodType" resultType="company">
+	select code_name paymentName, type_id comMethod
+	  from CODE_MANAGEMENT
+	 where type_name = 'payment'
+</select>
+
+
+<insert id="insertCompany" parameterType="company">
+	insert into COMPANY(
+	company_id, company_name, company_adress, company_reg_no, company_type, payment_method
+	) values (s_company_no.nextval, #{comName}, #{comAdress}, #{comRegNo}, #{comType}, #{comMethod} 
+	)
+</insert>
+
+<update id="updateCompany" parameterType="company">
+	update COMPANY
+ 	   set  company_name = #{comName},
+ 	    	company_adress = #{comAdress},
+ 	    	company_reg_no = #{comRegNo}, 
+ 	    	company_type = #{comType},
+ 	    	payment_method = #{comMethod}
+	 where company_id = #{comId}
+</update>
+
+<delete id="deleteCompany" parameterType="int">
+	delete from COMPANY
+	 where company_id = #{comId}
+</delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

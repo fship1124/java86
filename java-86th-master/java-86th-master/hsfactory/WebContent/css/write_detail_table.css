@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+#content > #companyTable {
+	margin: 10px auto;
+	border-collapse: collapse;
+}
+
+#content > #companyTable tr { 
+	margin: 5px;
+}
+
+#content > #companyTable tr:hover td, tr:hover th{ 
+	background-color: #dadada;
+}
+
+#content > #companyTable tr:nth-child(2n) { 
+	background-color: #f3f3f3;
+}
+
+#content > #companyTable tr:nth-child(2n+1) { 
+	background-color: #ffffff;
+}
+
+
+#content > #companyTable th { 
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#content > #companyTable td {
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: center;
+	font-size: 14px;
+	width: 200px;
+}

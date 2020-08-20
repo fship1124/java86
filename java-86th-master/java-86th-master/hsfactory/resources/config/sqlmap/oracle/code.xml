@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.CodeDAO">
+	<resultMap id="codeMap" type="code">
+		<result column="code_id" property="codeId"></result>
+		<result column="type_name" property="typeName"></result>
+		<result column="type_id" property="typeId"></result>
+		<result column="code_name" property="codeName"></result>
+	</resultMap>
+	
+	<select id="selectAuthType" resultType="String" parameterType="int">
+		select code_name as codeName
+		from code_management
+		where type_name='authority' and type_id=#{typeId}
+	</select>
+	
+	<select id="selectListCode" resultMap="codeMap">
+		select *
+		from code_management
+	</select>
+	
+	<select id="selectListCodeBytypeName" resultMap="codeMap" parameterType="String">
+		select *
+		from code_management
+		where type_name=#{typeName}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

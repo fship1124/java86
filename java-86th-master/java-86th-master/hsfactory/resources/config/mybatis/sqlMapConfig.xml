@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 설정파일에서 사용할 프로퍼티의 파일의 경로 지정: classpath -->
+	<properties resource="config/mybatis/db.properties"/>
+	
+	<!-- SQL의 결과를 담을 VO 객체들의 별칭을 설정하여 사용의 편의를 도모  -->
+	<typeAliases>
+		<typeAlias alias="account" type="VO.AccountVO" />
+		<typeAlias alias="code" type="VO.CodeManagementVO" />
+		<typeAlias alias="company" type="VO.CompanyVO" />
+		<typeAlias alias="customerOrder" type="VO.CustomerOrderVO" />
+		<typeAlias alias="eachProcess" type="VO.EachProcessVO" />
+		<typeAlias alias="factory" type="VO.FactoryVO" />
+		<typeAlias alias="inventory" type="VO.InventoryVO" />
+		<typeAlias alias="material" type="VO.MaterialVO" />
+		<typeAlias alias="process" type="VO.ProcessVO" />
+		<typeAlias alias="productOrder" type="VO.ProductOrderVO" />
+		<typeAlias alias="rawMaterialOrder" type="VO.RawMaterialOrderVO" />
+		<typeAlias alias="shipment" type="VO.ShipmentVO" />
+		<typeAlias alias="warehouse" type="VO.WarehouseVO" />	
+		<typeAlias alias="noticeFile" type="VO.NoticeFileVO" />
+		<typeAlias alias="noticeReply" type="VO.NoticeReplyVO" />
+		<typeAlias alias="notice" type="VO.NoticeVO" />
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="config/sqlmap/oracle/company.xml"/>
+		<mapper resource="config/sqlmap/oracle/warehouse.xml"/>
+		<mapper resource="config/sqlmap/oracle/factory.xml"/>
+		<mapper resource="config/sqlmap/oracle/eachProcess.xml"/>
+		<mapper resource="config/sqlmap/oracle/process.xml"/>
+		<mapper resource="config/sqlmap/oracle/customerOrder.xml"/>
+		<mapper resource="config/sqlmap/oracle/productOrder.xml"/>
+		<mapper resource="config/sqlmap/oracle/rawMaterialOrder.xml"/>
+		<mapper resource="config/sqlmap/oracle/inventory.xml"/>
+		<mapper resource="config/sqlmap/oracle/shipment.xml"/>
+		<mapper resource="config/sqlmap/oracle/account.xml"/>
+		<mapper resource="config/sqlmap/oracle/code.xml"/>
+		<mapper resource="config/sqlmap/oracle/material.xml"/>
+		<mapper resource="config/sqlmap/oracle/notice.xml"/>	
+	</mappers>
+</configuration>
+
+
+
+
+
+
+
+
+

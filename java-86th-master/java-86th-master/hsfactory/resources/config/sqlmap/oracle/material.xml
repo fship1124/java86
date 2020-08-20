@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.MaterialDAO">
+	
+<resultMap type="material" id="resultmap">
+	<result column="material_id" property="mtrId"/>
+	<result column="material_name" property="mtrName"/>
+	<result column="material_type" property="mtrType"/>
+	<result column="material_cost" property="mtrCost"/>
+	<result column="material_unit" property="mtrUnit"/>
+	<result column="meterial_reg_date" property="mtrRegDate"/>
+	<result column="code_name" property="mtrTypeName"/>
+</resultMap>
+
+<select id="selectList" resultMap="resultmap">
+	select *
+      from code_management, material
+     where type_name = 'product'
+       and material_type = type_id
+	<choose>
+    	<when test="orderColId == 'mtrId'">
+    		order by material_id asc
+    	</when>
+    	<when test="orderColId == 'mtrName'">
+    		order by material_name asc
+    	</when>
+    	<when test="orderColId == 'mtrCost'">
+    		order by material_cost asc
+    	</when>
+    	<otherwise>
+    		order by material_id desc
+    	</otherwise>
+    </choose> 
+</select>
+
+<insert id="insertMaterial" parameterType="material">
+	insert into material(
+	material_id, material_name, material_type, material_cost, material_unit
+	) values (s_material_no.nextval, #{mtrName}, #{mtrType}, #{mtrCost}, #{mtrUnit}
+	)
+</insert>
+
+<delete id="deleteMaterial" parameterType="int">
+	delete from material
+	 where material_id = #{mtrId}
+</delete>
+
+<select id="selectMaterialById" parameterType="int" resultMap="resultmap"> 
+    select *
+      from code_management, material
+     where material_id = #{mtrId}
+       and (type_name = 'product'
+       and material_type = type_id)
+</select>
+
+<select id="selectMaterialType" resultType="material">
+	select code_name mtrTypeName, type_id mtrType
+	  from CODE_MANAGEMENT
+	 where type_name = 'product'   
+</select>
+
+<select id="selectMaterialUnit" resultType="material">
+	select material_unit mtrUnit
+	  from material
+	 group by material_unit
+</select>
+
+<update id="updateMaterial" parameterType="material">
+	update material
+	   set material_name = #{mtrName},
+	       material_type = #{mtrType},
+	       material_cost = #{mtrCost},
+	   	   material_unit = #{mtrUnit}
+	 where material_id = #{mtrId}	   
+</update>
+
+	
+	 
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

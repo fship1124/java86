@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.EachProcessDAO">
+<resultMap type="eachProcess" id="eachProcessMap">
+	<result column="EP_ID" property="epId"/>
+	<result column="EP_NAME" property="epName"/>
+	<result column="EP_REG_DATE" property="epRegDate"/>
+	<result column="EPM_ID" property="epmId"/>
+	<result column="EPM_TYPE" property="epmType"/>
+	<result column="MATERIAL_ID" property="materialId"/>
+	<result column="MATERIAL_NAME" property="materialName"/>
+	<result column="MATERIAL_QUANTITY" property="materialQuantity"/>
+	<result column="CODE_NAME" property="codeName"/>
+</resultMap>
+
+<select id="selectEachProcess" parameterType="string" resultMap="eachProcessMap">
+SELECT EP.EP_ID, EP.EP_NAME, EP.EP_REG_DATE, 
+       EPM.EPM_ID, EPM.EPM_TYPE, EPM.MATERIAL_ID, EPM.MATERIAL_QUANTITY,
+       M.MATERIAL_NAME,
+       C.CODE_NAME
+FROM EACH_PROCESS EP, EACH_PROCESS_MATERIAL EPM, MATERIAL M, CODE_MANAGEMENT C
+WHERE EP.EP_ID = EPM.EP_ID
+  AND EPM.MATERIAL_ID = M.MATERIAL_ID
+  AND C.TYPE_NAME = #{type}
+  AND C.TYPE_ID = EPM.EPM_TYPE
+</select>
+
+
+
+
+<insert id="insertEachProcess" parameterType="eachProcess">
+	<selectKey keyProperty="epId" order="BEFORE" resultType="int">
+		select S_EACH_PROCESS_NO.NEXTVAL from dual
+	</selectKey>
+    insert into 
+    EACH_PROCESS (           
+		EP_ID, EP_NAME
+	) values (                       
+	    #{epId}, #{epName}
+	)                               
+</insert>
+
+
+<insert id="insertEachProcessMaterial" parameterType="eachProcess">
+    insert into 
+    EACH_PROCESS_MATERIAL (           
+		EPM_ID, EP_ID, EPM_TYPE, MATERIAL_ID, MATERIAL_QUANTITY
+	) values (                       
+	    S_EACH_PROCESS_MATERIAL_NO.NEXTVAL, #{epId}, #{epmType}, #{materialId}, #{materialQuantity} 
+	)                               
+</insert>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

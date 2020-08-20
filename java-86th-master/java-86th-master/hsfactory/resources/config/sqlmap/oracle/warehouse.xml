@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.WarehouseDAO">
+
+<resultMap type="warehouse" id="resultMap">
+	<result column="warehouse_id" property="wHouseId"/>
+	<result column="warehouse_name" property="wHouseName"/>
+	<result column="whtn" property="wHouseTypeName"/>
+	<result column="imagn" property="inventoryAlgorismName"/>
+	<result column="factory_name" property="factoryIdName"/>
+	<result column="warehouse_reg_date" property="wHouseRegDate"/>
+	<result column="imag" property="inventoryAlgorism"/>
+	<result column="warehouse_type" property="wHouseType"/>
+	<result column="type_id" property="typeId"/>
+</resultMap>
+
+<select id="selectList" resultMap="resultMap">
+select a.warehouse_id, a.warehouse_name, a.code_name whtn, b.code_name imagn, 
+	   f.factory_name, a.warehouse_reg_date, b.inventory_management_algorism imag, a.warehouse_type, b.type_id typeId
+  from (select *
+          from WAREHOUSE wh, CODE_MANAGEMENT cdmg
+         where (type_name = 'storage'
+           and wh.warehouse_type = cdmg.type_id)) a,
+       (select *
+          from WAREHOUSE wh, CODE_MANAGEMENT cdmg
+         where (type_name = 'algorithm'
+           and wh.inventory_management_algorism = cdmg.type_id)) b,
+       factory f        
+ where a.warehouse_id = b.warehouse_id
+   and a.factory_id = f.factory_id
+ order by warehouse_id desc
+</select>
+
+
+<insert id="insertWHouse">
+	insert into WAREHOUSE(
+	warehouse_id, warehouse_name, warehouse_type, inventory_management_algorism, factory_id
+	) values (s_warehouse_no.nextval, #{wHouseName}, #{wHouseType}, 
+	#{inventoryAlgorism}, #{factoryId})
+
+</insert>
+
+<delete id="deleteWHouse" parameterType="int">
+	delete from WAREHOUSE
+	 where warehouse_id = #{wHouseId}
+</delete>
+
+<select id="selectMaterialById" resultMap="resultMap">
+	select a.warehouse_id, a.warehouse_name, a.code_name whtn, b.code_name imagn, 
+	  	   f.factory_name, a.warehouse_reg_date, b.inventory_management_algorism imag, a.warehouse_type, b.type_id typeId
+  	  from (select *
+              from WAREHOUSE wh, CODE_MANAGEMENT cdmg
+             where (type_name = 'storage'
+               and wh.warehouse_type = cdmg.type_id)) a,
+           (select *
+              from WAREHOUSE wh, CODE_MANAGEMENT cdmg
+             where (type_name = 'algorithm'
+               and wh.inventory_management_algorism = cdmg.type_id)) b,
+           factory f 
+	 where warehouse_id = #{wHouseId}
+	   and (a.warehouse_id = b.warehouse_id
+	   and a.factory_id = f.factory_id)
+</select>
+
+<select id="selectinventoryAlgorism" resultType="warehouse">
+	select code_name inventoryAlgorismName, type_id
+	  from CODE_MANAGEMENT
+	 where type_name = 'algorithm'
+</select>
+
+<select id="selectFactoryName" resultType="warehouse">
+	select factory_id factoryId, factory_name factoryIdName
+	  from factory
+</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

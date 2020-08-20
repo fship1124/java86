@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+
+#greeting { 
+	text-decoration: none;
+	float: left;
+	margin-left: 50px;
+}
+
+#login {
+	position: fixed;
+	right: 10px;
+	text-decoration: none;
+	margin-right: 50px;
+	color: white;
+	font-size: 7px;
+}
+
+#login div{
+	float: right;
+	margin: 10px;
+}
+
+#login button {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border:2px solid #c0c0c0;   
+	background-Color:#ffffff;  
+	font-size:7px;
+	font-weight:bold;   
+	color:#000000;  
+	width:50px;height:25px; 
+}
+
+#login button:hover {
+	color:#ffffff;
+	background-Color:#000000;    
+}

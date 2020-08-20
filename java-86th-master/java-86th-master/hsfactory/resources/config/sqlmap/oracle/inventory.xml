@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.InventoryDAO">
+
+	<resultMap id="inventoryMap" type="inventory">
+		<result column="inventory_id" property="inventoryId"></result>
+		<result column="warehouse_id" property="warehouseId"></result>
+		<result column="material_id" property="materialId"></result>
+		<result column="material_quantity" property="materialQuantity"></result>
+		<result column="code_name" property="codeName"></result>
+		<result column="material_name" property="materialName"></result>
+		<result column="material_unit" property="materialUnit"></result>
+		<result column="material_cost" property="materialCost"></result>
+		<result column="warehouse_Name" property="warehouseName"></result>
+	</resultMap>
+
+<!-- 	모든 제품 재고 리스트 가져오기 -->
+	<select id="selectListInventory" resultMap="inventoryMap">
+		select * 
+		from inventory i, material m, warehouse w, ( 
+			select type_id, code_name
+			from code_management
+			where type_name like 'product'
+			) c 
+		where i.warehouse_id = w.warehouse_id
+		and i.material_id = m.material_id
+		and m.material_type = c.type_id
+		order by inventory_id
+	</select>
+	
+<!-- 	제품 타입에 따른 재고 리스트 가져오기 -->
+	<select id="selectListInventoryByMaterialType" resultMap="inventoryMap" parameterType="String">
+		select * 
+		from inventory i, material m, warehouse w, ( 
+			select type_id, code_name
+			from code_management
+			where type_name like 'product'
+			) c 
+		where i.warehouse_id = w.warehouse_id
+		and i.material_id = m.material_id
+		and m.material_type = c.type_id
+		and c.code_name like #{codeName}
+		order by inventory_id
+	</select>
+	
+	
+<!-- 	해당 제품 유형에 맞는 창고 리스트 구하기 -->
+	<select id="selectListWarehouse" resultType="warehouse" parameterType="int">
+		select warehouse_id as warehouseId, warehouse_name as warehouseName
+		from warehouse
+		where warehouse_type=(
+			select warehouse_type
+			from warehouse
+			where warehouse_id = (
+				select warehouse_id
+				from inventory
+				where inventory_id = #{inventoryId}
+			)
+		)	
+	</select>
+
+	
+<!-- 	insertForm에 필요한 리스트 -->
+	<select id="selectListWarehouseForInsert" resultType="warehouse">
+		select warehouse_id as warehouseId, warehouse_name as warehouseName
+		from warehouse 
+	</select>
+	
+	<select id="selectListMaterialForInsert" resultType="material">
+		select material_id as materialId, material_name as materialName, material_cost as materialCost, material_unit as materialUnit, c.code_name as materialType
+		from material m, (select * from code_management where type_name='product' ) c
+		where m.material_type = c.type_id
+	</select>
+	
+	
+	
+	
+	<update id="updateInventory" parameterType="inventory">
+		update inventory
+		set warehouse_id = #{warehouseId},
+		material_quantity = #{materialQuantity}
+		where inventory_id = #{inventoryId}
+	</update>
+	
+	<delete id="deleteInventory" parameterType="int">
+		delete from inventory
+		where inventory_id = #{inventoryId}
+	</delete>
+	
+	<insert id="insertInventory" parameterType="inventory">
+		insert into inventory(inventory_id, warehouse_id, material_id, material_quantity)
+		values (s_inventory_no.nextval, #{warehouseId}, #{materialId}, #{materialQuantity})
+	</insert>
+	
+
+
+<!-- hodong code -->
+<update id="updateByNoProductOrder" parameterType="productOrder">
+UPDATE INVENTORY
+    SET MATERIAL_QUANTITY = MATERIAL_QUANTITY - #{totalsum}
+    WHERE MATERIAL_ID = #{materialId}
+</update>
+
+
+<update id="updateCompleteByNoProductOrder" parameterType="int">
+UPDATE 
+    INVENTORY
+    SET MATERIAL_QUANTITY = MATERIAL_QUANTITY + (SELECT 
+                            MATERIAL_QUANTITY
+                            FROM PROCESS
+                            WHERE PROCESS_ID = #{no} )
+    WHERE MATERIAL_ID = (SELECT 
+                         MATERIAL_ID
+                         FROM PROCESS
+                         WHERE PROCESS_ID = #{no} )
+</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.ProductOrderDAO">
+<resultMap type="productOrder" id="productOrderMap">
+	<result column="PRODUCTION_ORDER_ID" property="productionOrderId"/>
+	<result column="PRODUCTION_ORDER_NAME" property="productionOrderName"/>
+	<result column="WORKER" property="worker"/>
+	<result column="ADMINISTRATOR" property="administrator"/>
+	<result column="PRODUCTION_ORDER_REG_DATE" property="productionOrderRegDate"/>
+	<result column="MATERIAL_QUANTITY" property="materialQuantity"/>
+	<result column="MATERIAL_NAME" property="materialName"/>
+	<result column="COMPANY_NAME" property="companyName"/>
+	<result column="CUSTOMER_ORDER_DEADLINE" property="customerOrderDeadline"/>
+	<result column="CODE_NAME" property="codeName"/>
+	<result column="PROCESS_NAME" property="processName"/>
+	<result column="PROCESS_ID" property="processId"/>
+	<result column="STATUS_TYPE" property="status"/>
+	<result column="TOTALSUM" property="totalsum"/>
+	<result column="MATERIAL_ID" property="materialId"/>
+	<result column="PRODUCTION_ORDER_COMPLETE_DATE" property="productionOrderCompleteDate"/>
+</resultMap>
+
+<select id="selectProductOrder" parameterType="string" resultMap="productOrderMap">
+SELECT PO.PRODUCTION_ORDER_ID, PO.PRODUCTION_ORDER_NAME, PO.WORKER, PO.ADMINISTRATOR, PO.STATUS_TYPE, 
+	   PO.PRODUCTION_ORDER_REG_DATE, PO.PRODUCTION_ORDER_COMPLETE_DATE, PO.PROCESS_ID, 
+       P.PROCESS_NAME, P.MATERIAL_QUANTITY, M.MATERIAL_NAME, 
+       C.COMPANY_NAME, CO.CUSTOMER_ORDER_DEADLINE, CM.CODE_NAME
+FROM PRODUCTION_ORDER PO, PROCESS P, CUSTOMER_ORDER CO, CODE_MANAGEMENT CM, MATERIAL M, COMPANY C
+WHERE PO.PROCESS_ID = P.PROCESS_ID
+AND PO.CUSTOMER_ORDER_ID = CO.CUSTOMER_ORDER_ID
+AND CM.TYPE_NAME = #{type}
+AND CM.TYPE_ID = PO.STATUS_TYPE
+AND M.MATERIAL_ID = P.MATERIAL_ID
+AND C.COMPANY_ID = CO.COMPANY_ID
+order by PO.PRODUCTION_ORDER_ID desc
+</select>
+
+<insert id="insertProductOrder" parameterType="productOrder">
+	insert into 
+		PRODUCTION_ORDER (
+			PRODUCTION_ORDER_ID, PRODUCTION_ORDER_NAME, PROCESS_ID, CUSTOMER_ORDER_ID, STATUS_TYPE, WORKER
+			) values (
+			S_PRODUCTION_ORDER_NO.NEXTVAL, #{productionOrderName}, #{processId}, #{customerOrderId}, #{status}, #{worker})
+</insert>
+
+<update id="updateStatusByNoProductOrder" parameterType="productOrder">
+	update PRODUCTION_ORDER
+	set status_type = #{status},
+	administrator = #{administrator}
+	where PRODUCTION_ORDER_ID = #{productionOrderId}
+</update>
+
+<update id="updateStatusStatingByNoProductOrder" parameterType="productOrder">
+	update PRODUCTION_ORDER
+	set status_type = #{status}
+	where PRODUCTION_ORDER_ID = #{productionOrderId}
+</update>
+
+<update id="updateStatusCompleteByNoProductOrder" parameterType="productOrder">
+	update PRODUCTION_ORDER
+	set status_type = #{status},
+	PRODUCTION_ORDER_COMPLETE_DATE = to_date(sysdate, 'yyyy/MM/dd')
+	where PRODUCTION_ORDER_ID = #{productionOrderId}
+</update>
+
+<select id="selectByMaterialId" parameterType="productOrder" resultMap="productOrderMap">
+SELECT EPM.MATERIAL_ID,
+       (	EPM.MATERIAL_QUANTITY
+        * (SELECT MATERIAL_QUANTITY
+             FROM PROCESS
+            WHERE PROCESS_ID = (SELECT P.PROCESS_ID
+                                  FROM PRODUCTION_ORDER P
+                                 WHERE P.PRODUCTION_ORDER_ID = #{productionOrderId})))
+          TOTALSUM
+  FROM EACH_PROCESS_MATERIAL EPM, MATERIAL M
+ WHERE     EPM.EPM_TYPE = #{epmType}
+       AND EPM.EP_ID IN
+              (SELECT PM.EP_ID
+                 FROM PROCESS_MAPPING PM
+                WHERE PM.PROCESS_ID = (SELECT P.PROCESS_ID
+                                         FROM PRODUCTION_ORDER P
+                                        WHERE P.PRODUCTION_ORDER_ID = #{productionOrderId}))
+       AND EPM.MATERIAL_ID = M.MATERIAL_ID
+       AND M.MATERIAL_TYPE IN('3', '4') 
+</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

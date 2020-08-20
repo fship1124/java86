@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.NoticeDAO">
+
+	<insert id="insertNotice" parameterType="notice">
+	    <selectKey keyProperty="noticeId" order="BEFORE" resultType="int">
+	        select s_notice_no.nextval from dual
+	    </selectKey>
+	    insert into notice(           
+		    notice_id, title, writer, content   
+		) values (                       
+		    #{noticeId}, #{title}, #{writer}, #{content} 
+		)                               
+	</insert>
+	
+	<update id="updateNotice" parameterType="notice">
+		update notice
+		   set title = #{title},
+		   content = #{content}
+		 where notice_id = #{noticeId}    	    
+	</update>
+	
+	
+	<delete id="deleteNotice" parameterType="int">
+	    delete
+	      from notice
+	     where notice_id = #{noticeId}    	 
+	</delete>
+	
+	<resultMap id="noticeMap" type="notice">
+	    <result column="notice_id" property="noticeId" />
+	    <result column="view_cnt" property="viewCnt" />
+	    <result column="reg_date" property="regDate" />
+	</resultMap>
+	
+	<select id="selectNotice" resultMap="noticeMap">
+	    select notice_id, title, writer, content, view_cnt, reg_date, 
+	    (select count(*)
+        from notice_reply
+        group by notice_id
+        having notice_id = n.notice_id) replyCnt
+		  from notice n
+		 order by notice_id desc 
+	</select>
+	
+	<select id="selectNoticeById" parameterType="int" resultMap="noticeMap">
+	    select *         
+		  from notice
+		 where notice_id = #{noticeId}
+	</select>
+	
+	<insert id="insertNoticeFile" parameterType="noticeFile">
+		insert into notice_File(
+			file_no, notice_id, ori_file_name, real_file_name, file_path, file_size
+		) values (
+			s_notice_file_no.nextVal, #{noticeId}, #{oriFileName}, #{realFileName}, #{filePath}, #{fileSize}		
+		)
+	</insert>
+	
+	<select id="selectNoticeFileById" parameterType="int" resultType="noticeFile">
+	    select file_no as fileNo, notice_id as noticeId, ori_file_name as oriFileName, real_file_name as realFileName, file_path as filePath, file_size as fileSize
+	      from notice_File
+	     where notice_id = #{noticeId}      
+	</select>
+	
+	<!-- 댓글 처리 DAO 시작 -->
+	<!-- ################################# -->	
+	
+	<select id="selectNoticeReplyById" parameterType="int" resultType="noticeReply">
+	    select reply_id as replyId,
+	           notice_id as noticeId,
+	           reply_writer as replyWriter,
+	           reply_content as replyContent,
+	           reply_reg_date as replyRegDate
+	      from notice_reply
+	     where notice_id = #{noticeId}      
+	</select>
+	
+	<insert id="insertNoticeReply" parameterType="noticeReply">
+		insert into notice_reply(
+			reply_id, notice_id, reply_writer, reply_content
+		) values (
+			s_notice_reply_no.nextVal, #{noticeId}, #{replyWriter}, #{replyContent}
+		)
+	</insert>
+	
+	<delete id="deleteNoticeReply" parameterType="int">
+	    delete 
+	      from notice_reply
+  		 where reply_id = #{replyId}      
+	</delete>
+	
+	<update id="updateNoticeReply" parameterType="noticeReply">
+	    update notice_reply
+	       set reply_content = #{replyContent}
+ 		 where reply_id = #{replyId}      
+	</update>
+	
+	<update id="updateNoticeViewCount" parameterType="int">
+		update notice
+		set view_cnt = view_cnt + 1
+		where notice_id = #{noticeId}
+	</update>
+	
+	<select id="selectReplyCountById" resultType="int" parameterType="int">
+		select count(*)
+		from notice_reply
+		group by notice_id
+		having notice_id = #{noticeId}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.ProcessDAO">
+<resultMap type="process" id="processMap">
+	<result column="PROCESS_ID" property="processId"/>
+	<result column="PROCESS_NAME" property="processName"/>
+	<result column="MATERIAL_ID" property="materialId"/>
+	<result column="MATERIAL_QUANTITY" property="materialQuantity"/>
+	<result column="PROCESS_REG_DATE" property="processRegDate"/>
+	<result column="MATERIAL_NAME" property="materialName"/>
+</resultMap>
+
+<select id="selectProcess" resultMap="processMap">
+SELECT P.PROCESS_ID, P.PROCESS_NAME, P.MATERIAL_ID, P.PROCESS_REG_DATE, P.MATERIAL_QUANTITY,
+       M.MATERIAL_NAME
+FROM PROCESS P, MATERIAL M
+WHERE P.MATERIAL_ID = M.MATERIAL_ID
+</select>
+
+<select id="selectAjaxProcess" resultType="process">
+SELECT EP.EP_ID epId, 
+	   EPM.EPM_TYPE epmType, 
+	   EPM.MATERIAL_ID materialId, 
+	   EPM.MATERIAL_QUANTITY materialQuantity, 
+	   M.MATERIAL_NAME materialName
+  FROM EACH_PROCESS EP, EACH_PROCESS_MATERIAL EPM, material M
+ where EP.EP_ID = EPM.EP_ID
+  and EPM.MATERIAL_ID = M.MATERIAL_ID
+</select>
+
+
+
+<insert id="insertProcess" parameterType="process">
+	<selectKey keyProperty="processId" order="BEFORE" resultType="int">
+		select S_PROCESS_NO.NEXTVAL from dual
+	</selectKey>
+    INSERT INTO 
+	    PROCESS (           
+			PROCESS_ID, PROCESS_NAME, MATERIAL_ID, MATERIAL_QUANTITY
+		) values (                       
+		    #{processId}, #{processName}, #{materialId}, #{materialQuantity}
+		)                               
+</insert>
+
+<insert id="insertProcessMapping" parameterType="process">
+	INSERT INTO 
+		PROCESS_MAPPING (
+			PROCESS_MAPPING_ID, PROCESS_ID, EP_ID
+		) values (
+			S_PROCESS_MAPPING_NO.NEXTVAL, #{processId}, #{epId}
+		)
+</insert>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

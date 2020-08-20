@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.CustomOrderDAO">
+<resultMap type="customerOrder" id="customerOrderMap">
+	<result column="CUSTOMER_ORDER_ID" property="customerOrderId"/>
+	<result column="CUSTOMER_ORDER_NAME" property="customerOrderName"/>
+	<result column="COMPANY_NAME" property="companyName"/>
+	<result column="MATERIAL_NAME" property="materialName"/>
+	<result column="MATERIAL_QUANTITY" property="materialQuantity"/>
+	<result column="CODE_NAME" property="codeName"/>
+	<result column="CUSTOMER_ORDER_DEADLINE" property="customerOrderDeadline"/>
+	<result column="CUSTOMER_ORDER_REG_DATE" property="customerOrderRegDate"/>
+</resultMap>
+
+<select id="selectCustomerOrder" parameterType="string" resultMap="customerOrderMap">
+select CO.CUSTOMER_ORDER_ID, CO.CUSTOMER_ORDER_NAME, C.COMPANY_NAME, M.MATERIAL_NAME, 
+	   CO.MATERIAL_QUANTITY, CM.CODE_NAME, CO.CUSTOMER_ORDER_DEADLINE, CO.CUSTOMER_ORDER_REG_DATE
+  from CUSTOMER_ORDER CO, COMPANY C, CODE_MANAGEMENT CM, MATERIAL M
+ where  CO.COMPANY_ID = C.COMPANY_ID
+       and CM.TYPE_NAME = #{type}
+       and C.COMPANY_TYPE = CM.TYPE_ID
+       and CO.MATERIAL_ID = M.MATERIAL_ID
+</select>
+
+<select id="select" resultType="customerOrder">
+select CUSTOMER_ORDER_ID as customerOrderId 
+	from 
+	CUSTOMER_ORDER
+</select>
+
+<insert id="insertCustomerOrder" parameterType="customerOrder">
+    insert into 
+    CUSTOMER_ORDER (           
+		customer_order_id, customer_order_name, company_id, material_id, material_quantity, customer_order_deadline
+	) values (                       
+	    S_CUSTOMER_ORDER_NO.NEXTVAL, #{customerOrderName}, #{companyId}, #{materialId}, #{materialQuantity}, #{customerOrderDeadline}
+	)                               
+</insert>
+
+<update id="updateByNoCustomerOrder" parameterType="customerOrder">
+	update CUSTOMER_ORDER
+	set customer_order_name = #{customerOrderName}
+	where CUSTOMER_ORDER_ID = #{customerOrderId}
+</update>
+
+</mapper>
+

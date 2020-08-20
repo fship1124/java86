@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.AccountDAO">
+	<resultMap id="accountMap" type="account">
+		<result column="system_authority_id" property="systemAuthorityId"></result>
+	</resultMap>
+	
+	<select id="selectOneAccount" resultMap="accountMap" parameterType="string">
+		select *
+		from account
+		where id=#{id}
+	</select>
+	
+	<select id="selectListAccount" resultMap="accountMap">
+        select system_authority_id, id, password, c.code_name as authority
+        from account a, (select type_id, code_name 
+                        from code_management
+                        where type_name='authority' ) c
+        where a.authority = c.type_id
+        order by system_authority_id
+	</select>
+	
+	<insert id="insertAccount" parameterType="account">
+		insert into account(SYSTEM_AUTHORITY_ID, id, password, AUTHORITY)
+		values (s_account_no.nextval, #{id}, #{password}, #{authority})
+	</insert>
+	
+	<delete id="deleteAccount" parameterType="int">
+		delete
+		from account
+		where system_authority_id=#{systemAuthorityId}
+	</delete>
+	
+	<update id="updateAccount" parameterType="account">
+		update account
+		set password=#{password}, authority=#{authority}
+		where id=#{id}
+	</update>
+	
+	<select id="selectId" resultType="account">
+        select id
+        from account
+	</select>
+	
+</mapper>

@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<ul class="mainLnb">
+		<li><a href="#">기준 정보</a>
+	    <ul>
+	        	        <li><a href="${pageContext.request.contextPath}/companyList.do">회사</a></li>
+	    	<li><a href="${pageContext.request.contextPath}/materialList.do">제품</a></li>
+	    </ul>
+	    </li>
+	    <li><a href="${pageContext.request.contextPath}/warehouseList.do">창고 관리</a>
+	    <ul>
+	    	<li><a href="${pageContext.request.contextPath}/warehouseList.do">창고</a></li> 
+	    </ul>
+	    </li>
+	        <li><a href="${pageContext.request.contextPath}/factoryList.do">회사 조직</a>
+	            <ul>
+	                <li><a href="${pageContext.request.contextPath}/factoryList.do">공장</a></li>
+	            </ul>
+	        </li>
+	        <li><a href="#">생산 공정</a>
+	            <ul>
+	                <li><a href="${pageContext.request.contextPath}/eachProcessList.do">개별 공정</a></li>
+	                <li><a href="${pageContext.request.contextPath}/processList.do">생산 공정</a></li>
+	            </ul>
+	        </li>
+	        <li><a href="#">생산 계획</a>
+	            <ul>
+	               <li><a href="${pageContext.request.contextPath}/customerOrderList.do">고객 주문</a></li>
+	                <li><a href="${pageContext.request.contextPath}/productOrderList.do">생산 주문</a></li>
+	            </ul>
+	        </li>
+	        <li><a href="#">자원 공급</a>
+	            <ul>
+	                <li><a href="${pageContext.request.contextPath}/rawMaterialOrderList.do">원재료 구매</a></li>
+	            </ul>
+	        </li>
+	        <li><a href="${pageContext.request.contextPath}/inventoryList.do">재고 관리</a>
+	            <ul>
+	                <li><a href="${pageContext.request.contextPath}/inventoryList.do">총재고현황</a></li>
+	                <li><a href="${pageContext.request.contextPath}/completeMaterialInventoryList.do">완제품 재고</a></li>
+	                <li><a href="${pageContext.request.contextPath}/midMaterialInventoryList.do">중간재 재고</a></li>
+	                <li><a href="${pageContext.request.contextPath}/subMaterialInventoryList.do">부자재 재고</a></li>
+	                <li><a href="${pageContext.request.contextPath}/oriMaterialInventoryList.do">원자재 재고</a></li>
+	            </ul>
+	        </li>
+	        <li><a href="${pageContext.request.contextPath}/shipmentList.do">출하 관리</a>
+	            <ul>
+	                <li><a href="${pageContext.request.contextPath}/shipmentList.do">출하 이력</a></li>
+	            </ul>
+	        </li>
+	        <li><a href="${pageContext.request.contextPath}/noticeList.do">시스템 관리</a>
+	            <ul>
+	                <li><a href="${pageContext.request.contextPath}/noticeList.do">공지사항</a></li>
+	                <li><a href="${pageContext.request.contextPath}/accountList.do">계정권한관리</a></li>
+	            </ul>
+	        </li>
+	</ul>

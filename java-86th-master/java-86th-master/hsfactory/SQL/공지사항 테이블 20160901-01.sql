@@ -1,0 +1,34 @@
+CREATE TABLE NOTICE
+(
+  NOTICE_ID  NUMBER(8)							PRIMARY KEY,
+  TITLE      VARCHAR2(300 BYTE)                 NOT NULL,
+  WRITER     VARCHAR2(30 BYTE)                  NOT NULL,
+  CONTENT    VARCHAR2(4000 BYTE)                NOT NULL,
+  REG_DATE   DATE                               DEFAULT sysdate,
+  VIEW_CNT   NUMBER(8)                          DEFAULT 0
+);
+
+CREATE SEQUENCE S_NOTICE_NO;
+
+CREATE TABLE NOTICE_REPLY
+(
+  REPLY_ID        NUMBER(8) 					PRIMARY KEY,
+  NOTICE_ID       NUMBER(8)                     NOT NULL,
+  REPLY_WRITER    VARCHAR2(30 BYTE)             NOT NULL,
+  REPLY_CONTENT   VARCHAR2(4000 BYTE)           NOT NULL,
+  REPLY_REG_DATE  DATE                          DEFAULT sysdate
+);
+
+CREATE SEQUENCE S_NOTICE_REPLY_NO;
+
+CREATE TABLE NOTICE_FILE
+(
+  FILE_NO         NUMBER,
+  NOTICE_ID       NUMBER(6)                     NOT NULL,
+  ORI_FILE_NAME   VARCHAR2(200 BYTE)            NOT NULL,
+  REAL_FILE_NAME  VARCHAR2(200 BYTE)            NOT NULL,
+  FILE_PATH       VARCHAR2(100 BYTE)            NOT NULL,
+  FILE_SIZE       NUMBER                        NOT NULL
+);
+
+CREATE SEQUENCE S_NOTICE_FILE_NO;
